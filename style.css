@@ -16,5 +16,61 @@ body{
         var(--primary-color) 0 40%,
         var(--secondary-color) 0 100%
     );
+    margin:0;
     height: 100dvh;
+    display:grid;
+    place-items: center;
+}
+
+/* groundhog{
+    margin: auto;
+    width: 450px;
+    height: 550px;
+    background-color: white;
+    border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+}
+
+hoofd{
+    display:flex;
+ left: 500000%;
+    width: 50%;
+    height: 50%;
+    background-color: black;
+    border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+} */
+
+section:has(div){
+   position: absolute;
+    width: 45dvw;
+display:grid;
+justify-items: center;
+    aspect-ratio: 45/55;
+    background-color: white;
+    border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+
+    & > div:first-child{
+        position:absolute;
+        top: 10%;
+        width: 75%;
+        height: 80%;
+        background-color: black;
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    }
+    & > div:nth-child(2){
+        position:absolute;
+        bottom: 90%;
+        width: 45%;
+        height: 35%;
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+        background-color: green;
+    }
+
+
+
+    /* & > ::after{
+        width: 75%;
+        height: 80%;
+        background-color: black;
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    } */
 }
