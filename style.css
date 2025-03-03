@@ -9,12 +9,105 @@
     --primary-color: #C3EEFA;
     --secondary-color: #805D3C;
 }
-body{
-   
-    background: linear-gradient(
-        to bottom,
-        var(--primary-color) 0 40%,
-        var(--secondary-color) 0 100%
-    );
-    height: 100dvh;
+
+ufuk{
+    width:10em;
+    height:15em;
+    background-color: lime;
+    display:block;
+
+    /* de eerste 4 zijn horizontaal de andere 4 verticaal 
+   https://www.dailytoolz.com/fancy-border-radius-generator/full-control-8-points.php#51.33.10.10-90.90.45.38-.
+    */
+    /*border-radius: 1em 2em 3em 4em / 1em 2em 3em 4em; */
+    border-radius: 60% 60% 60% 40% / 0;
+}
+
+
+ufuk:hover{
+    border-radius: 5em;
+}
+
+body {
+    margin:0;
+    height:100dvh;
+
+    display:grid;
+    place-items: center;
+}
+
+thijs{
+    width:50vw;
+    aspect-ratio: 3/2;
+    background-color: silver;
+
+    background-image: 
+    radial-gradient(
+    circle at left bottom, 
+       transparent 5vw,
+     green 0
+         /* green calc(100% - 6em),
+         transparent 0 */
+         ),
+         linear-gradient(
+            -45deg, 
+            transparent 5vw,
+             red 0
+             ),
+             conic-gradient(
+                at 5vw 5vw,
+                blue 270deg,
+                transparent 0
+                 ),
+                 linear-gradient(
+            -135deg, 
+            transparent 5vw,
+             orange 0
+             );
+
+
+/* background-size:50% 50%, 20% 20%, 30% 30%, 25% 25%; */
+background-size:51% 51%;
+
+background-position: left bottom, right bottom, left top, right top;
+background-repeat: no-repeat;
+}
+
+
+
+matthijs{
+    width:15em;
+    aspect-ratio: 1;
+    background-color: red;
+    
+}
+
+matthijs::before{
+    position:absolute;
+ bottom: 100%;
+ left:10%;
+    content:"hallo";
+
+    height: 8em;
+    width: 4em;
+    border-radius: 50% 50% 25% 25% / 75% 75% 25% 25%;
+    color:gold;
+    background-color: lime;
+
+transform-origin: bottom;
+
+    animation: draaien 2s infinite alternate ease-in-out;
+}
+
+matthijs::after{
+    content:"doei";
+}
+
+@keyframes draaien{
+    0%{
+rotate: -10deg;
+    }
+    100%{
+rotate: 10deg;
+    }
 }
