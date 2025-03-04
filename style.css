@@ -40,30 +40,42 @@ hoofd{
 } */
 
 section:has(div){
+    /* color pallete: https://www.color-hex.com/color-palette/1032945 */
+    --primary-color-groundhog:#613522;
+    --secondary-color-groundhog:#815d4e;
+    --third-color-groundhog:#a0867a;
+    --claw-color-groundhog:#dfd7d3;
    position: absolute;
     width: 25dvw;
     aspect-ratio: 35/55;
     display:grid;
     justify-items: center;
-    background-color: #664625;
+    background-color: var(--primary-color-groundhog);
     border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    max-height: 60vh;
+    border: 3px solid black;
 
+    /* fur */
     & > div:first-child{
         position:absolute;
         top: 10%;
         width: 75%;
-        aspect-ratio: 30/55;
-        background-color: #805D3C;
+        height: 85%;
+        /* aspect-ratio: 30/40;  */
+        background-color: var(--secondary-color-groundhog);
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
     }
+    /* head */
     & > :nth-child(2){
         position:absolute;
         bottom: 90%;
         width: 55%;
         height: 40%;
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
-        background-color: #664625;
+        background-color: var(--primary-color-groundhog);
+        border: 3px solid black;
 
+        /* snout */
         & :first-child{
             position:absolute;
             bottom: 20%;
@@ -71,8 +83,10 @@ section:has(div){
             width: 55%;
             height: 40%; 
             border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
-            background-color: #805D3C;
+            background-color: var(--secondary-color-groundhog);
+            border: 1px solid black;
 
+            /* nose */
             & :first-child{
                 position:absolute;
              
@@ -85,21 +99,41 @@ section:has(div){
                 background-color: black;
             }
 
+            /* teeth left*/
             & :nth-child(2){
                 position:absolute;
              
-                top: 85%;
-                left: 50%;
+                top: 80%;
+                left: 43%;
                 transform: translate(-50%, -50%);
-                width: 25%;
-                height: 35%; 
+                width: 15%;
+                height: 30%; 
+                border-radius: 6% 0% 10% 10% / 0% 0% 100% 100%;
+                background-color: #dfd7d3;
+                border: 1px solid black;
+                border-top: none;
+                 
+            }
+
+            /* teeth right */
+            & :nth-child(3){
+                position:absolute;
+             
+                top: 80%;
+                left: 56%;
+                transform: translate(-50%, -50%);
+                width: 15%;
+                height: 30%; 
                 border-radius: 6% 0% 10% 10% / 0% 0% 100% 100%;
                 background-color: white;
+                border: 1px solid black;
+                border-top: none;
                  
             }
         }
 
-    & :nth-child(2){
+        /* left eye */
+    & > :nth-child(2){
         position:absolute;
         top: 30%;
         left: 35%;
@@ -109,10 +143,17 @@ section:has(div){
         height: 15%;
         
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
-        background-color: black;
+        
+        background-image: 
+        radial-gradient(
+        circle at bottom right, 
+           black 1.4vw,
+         white 0
+             )
     }
 
-    & :nth-child(3){
+    /* right eye */
+    & > :nth-child(3){
         position:absolute;
         top: 30%;
         left: 70%;
@@ -122,11 +163,91 @@ section:has(div){
         height: 15%;
         
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
-        background-color: black;
-    }
+
+        background-image: 
+        radial-gradient(
+        circle at left, 
+           black 1.1vw,
+         white 0
+             )
     }
 
+    /* left ear */
+    & :nth-child(4){
+        position:absolute;
+        top: 5%;
+        left: 20%;
+        transform: translate(-50%, -50%);
+
+        width: 15%;
+        height: 20%;
+        
+        border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+        border: 2px solid black;
+        z-index: -1;
+
+        background-image: 
+        radial-gradient(
+        circle, 
+           var(--third-color-groundhog) .6vw,
+         var(--primary-color-groundhog) 0
+             )
+    }
+
+    /* right ear */
+    & :nth-child(5){
+        position:absolute;
+        top: 5%;
+        left: 80%;
+        transform: translate(-50%, -50%);
+
+        width: 15%;
+        height: 20%;
+        
+        border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+        background-color: var(--primary-color-groundhog);
+        border: 2px solid black;
+        z-index: -1;
+
+        background-image: 
+        radial-gradient(
+        circle, 
+           var(--third-color-groundhog) .6vw,
+         var(--primary-color-groundhog) 0
+             )
+    }
+}
+    /* left arm */
+    & > :nth-child(3){
+        position:absolute;
+        transform-origin: top;
+        top: 15%;
+        left: 10%;
+        width: 20%;
+        height: 60%; 
+        background-color: var(--primary-color-groundhog);
+        rotate: 35deg;
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+        border: 3px solid black;
+
+        animation: zwaaien1 1s infinite alternate ease-in-out;
+    }
     
+    /* right arm */
+    & > :nth-child(4){
+        position:absolute;
+        transform-origin: top;
+        top: 15%;
+        left: 65%;
+        width: 20%;
+        height: 60%; 
+        background-color: var(--primary-color-groundhog);
+        rotate: -30deg;
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+        border: 3px solid black;
+
+        animation: zwaaien2 1s infinite alternate ease-in-out;
+    }
 
 
 
@@ -136,4 +257,38 @@ section:has(div){
         background-color: black;
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
     } */
+}
+
+
+section:has(section){
+    animation: draaien 3s infinite alternate ease-in-out;
+    transform-origin: bottom;
+}
+
+
+@keyframes draaien{
+    0%{
+rotate: -10deg;
+    }
+    100%{
+rotate: 10deg;
+    }
+}
+
+@keyframes zwaaien1{
+    0%{
+rotate: 130deg;
+    }
+    100%{
+rotate: 160deg;
+    }
+}
+
+@keyframes zwaaien2{
+    0%{
+rotate: 180deg;
+    }
+    100%{
+rotate: 210deg;
+    }
 }

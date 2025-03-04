@@ -38,3 +38,5 @@ Proces foto 1:
 
 ## Bronnen
 border radius maker: https://www.dailytoolz.com/fancy-border-radius-generator/full-control-8-points.php#75.85.75.55-5.16.5.45-.
+
+color pallete groundhog: https://www.color-hex.com/color-palette/1032945
