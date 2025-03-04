@@ -25,14 +25,16 @@ nesting
 
 Mijn plan voor deze week is om de groundhog te maken met css. Ik had me ingeschreven voor een les 'vormpjes met css' en ben na die les verder gaan expirementeren. Ik had in mijn hoofd hoe ik de hierachy wou doen, maar het lukte me niet om de child objects te verplaatsen. Ik vroeg hulp aan Sanne en toen zijn we er al snel achter gekomen dat het kwam doordat ik een lijn code miste namelijk "position: absolute".
 
+![alt text](images/GroundhogTry1.png)
+
 Nadat ik die lijn code had kon ik daadwerkelijk de groundhog maken. Ik begon met plaatjes vinden online in een simplistische stijl, omdat dat mij het makkelijkst leek.
 ![alt text](images/groundhogmoodboard.png)
 
 Proces foto 1:
 
-![alt text](images/image-1.png)
-![alt text](images/image-2.png)
-![alt text](images/image.png)
+![alt text](images/CSSCode1Week2.png)
+![alt text](images/HTMLCode1Week2.png)
+![alt text](images/GroundhogTry2.png)
 
 ## Bronnen
 border radius maker: https://www.dailytoolz.com/fancy-border-radius-generator/full-control-8-points.php#75.85.75.55-5.16.5.45-.
