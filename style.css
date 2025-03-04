@@ -41,29 +41,92 @@ hoofd{
 
 section:has(div){
    position: absolute;
-    width: 45dvw;
-display:grid;
-justify-items: center;
-    aspect-ratio: 45/55;
-    background-color: white;
+    width: 25dvw;
+    aspect-ratio: 35/55;
+    display:grid;
+    justify-items: center;
+    background-color: #664625;
     border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
 
     & > div:first-child{
         position:absolute;
         top: 10%;
         width: 75%;
-        height: 80%;
-        background-color: black;
+        aspect-ratio: 30/55;
+        background-color: #805D3C;
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
     }
-    & > div:nth-child(2){
+    & > :nth-child(2){
         position:absolute;
         bottom: 90%;
-        width: 45%;
-        height: 35%;
+        width: 55%;
+        height: 40%;
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
-        background-color: green;
+        background-color: #664625;
+
+        & :first-child{
+            position:absolute;
+            bottom: 20%;
+            left: 25%;
+            width: 55%;
+            height: 40%; 
+            border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
+            background-color: #805D3C;
+
+            & :first-child{
+                position:absolute;
+             
+                top: 30%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 35%;
+                height: 40%; 
+                border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
+                background-color: black;
+            }
+
+            & :nth-child(2){
+                position:absolute;
+             
+                top: 85%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 25%;
+                height: 35%; 
+                border-radius: 6% 0% 10% 10% / 0% 0% 100% 100%;
+                background-color: white;
+                 
+            }
+        }
+
+    & :nth-child(2){
+        position:absolute;
+        top: 30%;
+        left: 35%;
+        transform: translate(-50%, -50%);
+
+        width: 15%;
+        height: 15%;
+        
+        border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+        background-color: black;
     }
+
+    & :nth-child(3){
+        position:absolute;
+        top: 30%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+
+        width: 15%;
+        height: 15%;
+        
+        border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+        background-color: black;
+    }
+    }
+
+    
 
 
 
