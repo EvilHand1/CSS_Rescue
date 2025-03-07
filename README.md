@@ -58,6 +58,22 @@ Toen ik dit had, ging ik expirementeren met animaties, om te kijken of alles goe
 ![alt text](image-5.png)
 
 ![alt text](image-6.png)
+
+## Feedback, Vooruitgang & Volgende Week
+
+### Feedback
+
+### Vooruitgang
+
+* groundhog
+* gelaagdheid genegeerd
+
+### volgende week
+
+* groundhog graaf animatie
+
+* meer groundhog
+
 ## Bronnen
 border radius maker: https://www.dailytoolz.com/fancy-border-radius-generator/full-control-8-points.php#75.85.75.55-5.16.5.45-.
 
