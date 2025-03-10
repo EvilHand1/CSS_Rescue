@@ -63,6 +63,8 @@ Toen ik dit had, ging ik expirementeren met animaties, om te kijken of alles goe
 
 ### Feedback
 
+* maak de groundhog mooier, het ziet eruit alsof een 5 jarige dit heeft gemaakt.
+
 ### Vooruitgang
 
 * groundhog
@@ -80,3 +82,14 @@ border radius maker: https://www.dailytoolz.com/fancy-border-radius-generator/fu
 color pallete groundhog: https://www.color-hex.com/color-palette/1032945
 
 css origin-top: https://www.w3schools.com/cssref/css3_pr_transform-origin.php
+
+
+# Proces week 3
+
+## feedback, vooruitgang & volgende week
+
+### Feedback
+
+### vooruitgang
+
+### volgende week

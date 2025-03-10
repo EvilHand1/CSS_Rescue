@@ -10,50 +10,54 @@
     --secondary-color: #805D3C;
 }
 body{
-   
+    min-block-size: 600dvh;
     background: linear-gradient(
         to bottom,
-        var(--primary-color) 0 40%,
+        var(--primary-color) 0 30dvh,
         var(--secondary-color) 0 100%
     );
     margin:0;
-    height: 100dvh;
+    /* height: 100dvh; */
     display:grid;
     place-items: center;
 }
 
-/* groundhog{
-    margin: auto;
-    width: 450px;
-    height: 550px;
-    background-color: white;
-    border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+/* DE BOSMARMOT */
+
+section:has(section){
+    --size-bosmarmot:25dvw;
+    --size-line:calc(  var(--size-bosmarmot) / 100);
+    position: fixed;
+    top: 30vh;
+    
+   animation: draaien linear;
+  animation-timeline: scroll();
+   animation-range-start: 10px;
+   animation-iteration-count: 5;
+
+  width: var(--size-bosmarmot);
+    aspect-ratio: 35/40;
 }
 
-hoofd{
-    display:flex;
- left: 500000%;
-    width: 50%;
-    height: 50%;
-    background-color: black;
-    border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
-} */
-
-section:has(div){
+section:has(> div){
     /* color pallete: https://www.color-hex.com/color-palette/1032945 */
     --primary-color-groundhog:#613522;
     --secondary-color-groundhog:#815d4e;
     --third-color-groundhog:#a0867a;
     --claw-color-groundhog:#dfd7d3;
-   position: absolute;
-    width: 25dvw;
-    aspect-ratio: 35/55;
+    --border-color: black;
+    --white:white;
+
+    position: absolute;
+    width:100%;
+    height:100%;
+    
     display:grid;
     justify-items: center;
     background-color: var(--primary-color-groundhog);
     border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
 
-    border: 3px solid black;
+    border: var(--size-line) solid var(--border-color);
 
     /* fur */
     & > div:first-child{
@@ -64,6 +68,7 @@ section:has(div){
         /* aspect-ratio: 30/40;  */
         background-color: var(--secondary-color-groundhog);
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+        border: var(--size-line)  solid var(--border-color);
     }
     /* head */
     & > :nth-child(2){
@@ -73,7 +78,7 @@ section:has(div){
         height: 40%;
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
         background-color: var(--primary-color-groundhog);
-        border: 3px solid black;
+        border: var(--size-line) solid var(--border-color);
 
         /* snout */
         & :first-child{
@@ -84,7 +89,7 @@ section:has(div){
             height: 40%; 
             border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
             background-color: var(--secondary-color-groundhog);
-            border: 1px solid black;
+            border: var(--size-line)  solid var(--border-color);
 
             /* nose */
             & :first-child{
@@ -110,7 +115,7 @@ section:has(div){
                 height: 30%; 
                 border-radius: 6% 0% 10% 10% / 0% 0% 100% 100%;
                 background-color: #dfd7d3;
-                border: 1px solid black;
+                border: var(--size-line) solid var(--border-color);
                 border-top: none;
                  
             }
@@ -126,7 +131,7 @@ section:has(div){
                 height: 30%; 
                 border-radius: 6% 0% 10% 10% / 0% 0% 100% 100%;
                 background-color: white;
-                border: 1px solid black;
+                border: var(--size-line) solid var(--border-color);
                 border-top: none;
                  
             }
@@ -143,11 +148,11 @@ section:has(div){
         height: 15%;
         
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
-        
+        border: var(--size-line) solid var(--border-color);
         background-image: 
         radial-gradient(
         circle at bottom right, 
-           black 1.4vw,
+           black 1vw,
          white 0
              )
     }
@@ -163,11 +168,11 @@ section:has(div){
         height: 15%;
         
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
-
+        border: var(--size-line) solid var(--border-color);
         background-image: 
         radial-gradient(
         circle at left, 
-           black 1.1vw,
+           black .7vw,
          white 0
              )
     }
@@ -183,7 +188,7 @@ section:has(div){
         height: 20%;
         
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
-        border: 2px solid black;
+        border: var(--size-line)  solid var(--border-color);
         z-index: -1;
 
         background-image: 
@@ -206,7 +211,7 @@ section:has(div){
         
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
         background-color: var(--primary-color-groundhog);
-        border: 2px solid black;
+        border: var(--size-line)  solid var(--border-color);
         z-index: -1;
 
         background-image: 
@@ -228,9 +233,63 @@ section:has(div){
         background-color: var(--primary-color-groundhog);
         rotate: 35deg;
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
-        border: 3px solid black;
+        border: var(--size-line) solid var(--border-color);
 
-        animation: zwaaien1 1s infinite alternate ease-in-out;
+        /* animation: zwaaien1 3s infinite alternate ease-in-out; */
+        animation: zwaaien1 linear forwards;
+        animation-timeline: scroll();
+        animation-iteration-count: 5;
+        animation-range-start: 10px;
+    
+        /* left hand */
+    & :first-child{
+        position:absolute;
+       
+        bottom: -10%;
+        left: -15%;
+        width: 125%;
+        height: 30%; 
+        background-color: var(--primary-color-groundhog);
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+        border: var(--size-line) solid var(--border-color);
+
+        /* middle claw */
+        & :first-child{
+            position:absolute;
+            bottom: -20%;
+            left: 10%;
+            width: 70%;
+            height: 30%; 
+            rotate: 95deg;
+            background-color: var(--claw-color-groundhog);
+            border: var(--size-line) solid var(--border-color);
+            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+
+    /* right claw */
+        &::after{
+            content:"";
+            position:absolute;
+            bottom: 150%;
+            width: 110%;
+            height: 120%;
+            background-color: var(--claw-color-groundhog);
+            border: var(--size-line) solid var(--border-color);
+            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+        }
+
+        /* left claw */
+        &::before{
+            content:"";
+            position:absolute;
+            bottom: -175%;
+            width: 110%;
+            height: 120%;
+            background-color: var(--claw-color-groundhog);
+            border: var(--size-line) solid var(--border-color);
+            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+        }
+    }
+    }
     }
     
     /* right arm */
@@ -244,51 +303,122 @@ section:has(div){
         background-color: var(--primary-color-groundhog);
         rotate: -30deg;
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
-        border: 3px solid black;
+        border: var(--size-line) solid var(--border-color);
 
-        animation: zwaaien2 1s infinite alternate ease-in-out;
+         animation: zwaaien2 linear forwards;
+         animation-timeline: scroll();
+         animation-iteration-count: 5;
+         animation-range-start: 10px;
+    
+        & :first-child{
+            position:absolute;
+            bottom: -10%;
+            left: -15%;
+            width: 125%;
+            height: 30%; 
+            background-color: var(--primary-color-groundhog);
+            border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+            border: var(--size-line) solid var(--border-color);
+
+            /* middle claw */
+            & :first-child{
+                position:absolute;
+                bottom: -20%;
+                left: 10%;
+                width: 70%;
+                height: 30%; 
+                rotate: -95deg;
+                background-color: var(--claw-color-groundhog);
+                border: var(--size-line) solid var(--border-color);
+                border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;
+
+                /* right claw */
+                &::after{
+                    content:"";
+                    position:absolute;
+                    bottom: 150%;
+                    width: 110%;
+                    height: 120%;
+                    background-color: var(--claw-color-groundhog);
+                    border: var(--size-line) solid var(--border-color);
+                    border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;
+                }
+
+                /* left claw */
+                &::before{
+                    content:"";
+                    position:absolute;
+                    bottom: -200%;
+                    width: 110%;
+                    height: 120%;
+                    background-color: var(--claw-color-groundhog);
+                    border: var(--size-line) solid var(--border-color);
+                    border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;
+                }
+            }
+        }
     }
-
-
-
-    /* & > ::after{
-        width: 75%;
-        height: 80%;
-        background-color: black;
-        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
-    } */
 }
 
 
-section:has(section){
-    animation: draaien 3s infinite alternate ease-in-out;
-    transform-origin: bottom;
-}
+
 
 
 @keyframes draaien{
     0%{
-rotate: -10deg;
+rotate: 180deg;
+    }
+    25%{
+        rotate:190deg;
+    }
+    50%{
+        rotate: 180deg;
+    }
+    75%{
+        rotate:170deg;
     }
     100%{
-rotate: 10deg;
+        rotate: 180deg;
     }
 }
 
+
 @keyframes zwaaien1{
     0%{
-rotate: 130deg;
+        rotate: 185deg;
+        top: 15%;
+    }
+    33%{
+        top: 20%;
+        rotate: 140deg;
+    }
+    66%{
+        top: 25%;
+        rotate: 185deg;
     }
     100%{
-rotate: 160deg;
+        rotate: 185deg;
+        top: 15%;
     }
 }
 
 @keyframes zwaaien2{
     0%{
-rotate: 180deg;
+        rotate: 180deg;
+        top: 15%;
+    }
+
+    33%{
+        top: 20%;
+        rotate: 230deg;
+    }
+
+    66%{
+        top: 25%;
+        rotate: 180deg;
     }
     100%{
-rotate: 210deg;
+        rotate: 180deg;
+        top: 15%;
     }
 }
