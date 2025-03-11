@@ -18,7 +18,7 @@ body{
         var(--secondary-color) 0 100%
     );
     margin:0;
-    /* height: 100dvh; */
+    height: 100dvh;
     display:grid;
     place-items: center;
 
@@ -29,7 +29,19 @@ body{
 
 /* DE BOSMARMOT */
 
+/* https://stackoverflow.com/questions/8384751/css-text-gradient */
+h1{
+    position: absolute;
+    font-size:3em;
+    top: calc(var(--size-bosmarmot) * 2);
+    background-image: linear-gradient(#f6371b 40%, transparent);
+    color: transparent;
+    background-clip: text;
+    -webkit-text-stroke: 1px black;
 
+  
+    
+}
 section:has(section){
     --size-line:calc(  var(--size-bosmarmot) / 100);
     width: var(--size-bosmarmot);
@@ -249,8 +261,6 @@ section:has(> div){
         background-color: var(--claw-color-groundhog);
     }
 }
-
-
 
 
 
