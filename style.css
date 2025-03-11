@@ -116,33 +116,43 @@ section:has(> div){
 
         /* left eye */
     & > :nth-child(2), >:nth-child(3){
+        --eye-closed: 0%;
         top: 20%;
         left: 30%;
         width: 15%;
         height: 15%;  
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
-        background-image: 
+
+        background-image:
+        radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
         radial-gradient(
         circle at bottom right, 
-           black 1vw,
-         white 0
+           black 50%,
+           white 0
              );
-    }
+             
+             animation: blink 2s infinite;
+            }
 
     /* right eye */
     & > :nth-child(3){
         top: 20%;
         left: 60%;
-        background-image: 
+        background-image:
+        radial-gradient(
+            circle at top,
+            var(--primary-color-groundhog) var(--eye-closed),
+            var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2),
+            transparent 0),
         radial-gradient(
         circle at left, 
-           black .7vw,
+           black 50%,
          white 0
              );
     }
 
     /* left ear */
-    & :nth-child(1n + 4){
+    & > :nth-child(4), & > :nth-child(5){
         top: -5%;
         left: 15%;
         width: 15%;
@@ -154,14 +164,26 @@ section:has(> div){
         circle, 
            var(--third-color-groundhog) .6vw,
          var(--primary-color-groundhog) 0
-             )
+             );
+transition: transform 0.3s ease-in-out; 
+             animation: earWiggle 2s infinite ease-in-out;    
+             transition: all 1s;     
     }
-
+   
     /* right ear */
     & :nth-child(5){
         top: -5%;
         left: 70%;
+        animation: earWiggle 1s infinite ease-in-out;
     }
+
+    &:hover > :nth-child(4),
+    &:hover > :nth-child(5){
+        border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+        rotate: -50deg;
+
+     }
+
     }
     /* left arm */
     & > :nth-child(3), & > :nth-child(4){
@@ -312,16 +334,21 @@ rotate: 180deg;
 }
 
 
-@keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
-  }
+@keyframes blink {
+    0% {
+        --eye-closed: 75%;
+    }
+    30%{
+        --eye-closed: 0%;
+    }
+
+}
+
+@keyframes earWiggle{
+    0%, 100%{
+        transform: rotateX(0deg);
+    }
+    50%{
+        transform: rotateX(20deg);
+    }
+}
