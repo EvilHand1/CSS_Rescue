@@ -39,25 +39,25 @@ Proces foto 1:
 
 Daarna ging ik werken aan de ogen, maar het zag er nog steeds niet heel goed uit dus ik ging verder met de oren. Er klopte nog steeds iets niet, en ik besefte me het waren de pupillen. Dus toen ik die had toegevoegd samen met een outline, zag het er al veel beter uit.
 
-![alt text](image.png)
-![alt text](image-1.png)
+![alt text](images/image.png)
+![alt text](images/image-1.png)
 
 Daarna ging ik aan de armen werken, maar het origin point was in de center, dus als ik de armen draaide zag het er heel slecht uit. Uiteindelijk vond ik "transform-origin: top;" Waarna het wel werkte.
 
 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 Toen ik dit had, ging ik expirementeren met animaties, om te kijken of alles goed bleef zitten. 
 
-![alt text](image-3.png)
+![alt text](images/image-3.png)
 
 ![alt text](images/GroundHogWave.gif)
 
-![alt text](image-4.png)
+![alt text](images/image-4.png)
 
-![alt text](image-5.png)
+![alt text](images/image-5.png)
 
-![alt text](image-6.png)
+![alt text](images/image-6.png)
 
 ## Feedback, Vooruitgang & Volgende Week
 
@@ -86,6 +86,10 @@ css origin-top: https://www.w3schools.com/cssref/css3_pr_transform-origin.php
 
 # Proces week 3
 
+
+![alt text](images/image-7.png)
+
+van 290 lines naar 219
 ## feedback, vooruitgang & volgende week
 
 ### Feedback
