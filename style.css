@@ -74,7 +74,7 @@ section:has(> div){
         bottom: 90%;
         width: 55%;
         height: 40%;
-
+        transition: all 1s;     
         /* snout */
         & :first-child{
             bottom: 20%;
@@ -132,6 +132,7 @@ section:has(> div){
              );
              
              animation: blink 2s infinite;
+             transition: all 1s;  
             }
 
     /* right eye */
@@ -177,11 +178,25 @@ transition: transform 0.3s ease-in-out;
         animation: earWiggle 1s infinite ease-in-out;
     }
 
+&:hover > :nth-child(3),
+&:hover > :nth-child(2){
+    background-image:
+        radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
+        radial-gradient(
+        circle at center, 
+           black 30%,
+           white 0
+             );
+}
+
     &:hover > :nth-child(4),
     &:hover > :nth-child(5){
         border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
         rotate: -50deg;
-
+     }
+     &:hover{
+        width: 45%;
+        height: 30%;
      }
 
     }
