@@ -356,6 +356,7 @@ rotate: 180deg;
     }
 }
 
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries */
 @container (max-width: 100px) {
     section:has(> div) > div:first-child {
         width: 65%;
@@ -387,6 +388,7 @@ rotate: 180deg;
   }
 
 
+  /* https://codepen.io/shooft/pen/jORqgdg?editors=1100 */
 :root:has([value="raccoon"]:checked) {
 	--colors:raccoon;
 }
