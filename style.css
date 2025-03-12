@@ -14,17 +14,13 @@ body{
     min-block-size: 600dvh;
     background: linear-gradient(
         to bottom,
-        var(--primary-color) 0 calc(var(--size-bosmarmot) * 0.6),
+        var(--primary-color) 0 calc(var(--size-bosmarmot) * 0.8),
         var(--secondary-color) 0 100%
     );
     margin:0;
     /* height: 100dvh; */
     display:grid;
     place-items: center;
-
-    /* animation: shake linear forwards;
-        animation-timeline: scroll();
-        animation-range-start: 100px; */
 }
 
 /* DE BOSMARMOT */
@@ -35,12 +31,14 @@ section:has(section){
     width: var(--size-bosmarmot);
     aspect-ratio: 35/40;
     position: fixed;
-    top: calc(var(--size-bosmarmot) * 0.5);
+    top: calc(var(--size-bosmarmot) * 0.6);
     animation: draaien linear;
     animation-timeline: scroll();
-    animation-range-start: 10px;
+    animation-range-start: 30px;
     animation-iteration-count: 5;
     
+    container-type: inline-size;
+
     & :nth-child(1n){
         position:absolute;
         border: var(--size-line) solid var(--border-color);
@@ -195,8 +193,8 @@ transition: transform 0.3s ease-in-out;
         rotate: -50deg;
      }
      &:hover{
-        width: 45%;
-        height: 30%;
+        width: 35%;
+        height: 20%;
      }
 
     }
@@ -209,10 +207,10 @@ transition: transform 0.3s ease-in-out;
         height: 60%; 
         rotate: 35deg;
 
-        animation: zwaaien1 linear forwards;
+        animation: zwaaien1 linear;
         animation-timeline: scroll();
         animation-iteration-count: 5;
-        animation-range-start: 10px;
+        animation-range-start: 30px;
         /* The claw on the left hand */
         & > :first-child > :first-child{
             /* middle claw */
@@ -240,10 +238,10 @@ transition: transform 0.3s ease-in-out;
     & > :nth-child(4){
         left: 70%;
         rotate: -35deg;
-        animation: zwaaien2 linear forwards;
+        animation: zwaaien2 linear;
         animation-timeline: scroll();
         animation-iteration-count: 5;
-        animation-range-start: 10px;
+        animation-range-start: 30px;
 
          /* The claw on the left hand */
         & :first-child > :first-child{
@@ -284,6 +282,7 @@ transition: transform 0.3s ease-in-out;
         width: 70%;
         height: 30%; 
         background-color: var(--claw-color-groundhog);
+        z-index: -1;
     }
 }
 
@@ -293,58 +292,42 @@ transition: transform 0.3s ease-in-out;
 
 
 @keyframes draaien{
-    0%{
+    0%, 100%{
 rotate: 180deg;
-    }
-    25%{
-        rotate:185deg;
-    }
-    75%{
-        rotate:175deg;
-    }
-    100%{
-        rotate: 180deg;
-    }
+    } 
 }
 
 
-@keyframes zwaaien1{
-    0%{
-        rotate: 185deg;
-        top: 15%;
+@keyframes zwaaien1 {
+    0% {
+        transform: rotate(150deg) translateY(0%); /* Initial position */
     }
-    33%{
-        top: 20%;
-        rotate: 140deg;
+    33% {
+        transform: rotate(90deg) translateY(-5%); /* Move down */
     }
-    66%{
-        top: 25%;
-        rotate: 185deg;
+    66% {
+        transform: rotate(150deg) translateY(-10%); /* Move further down */
     }
-    100%{
-        rotate: 185deg;
-        top: 15%;
+    100% {
+        transform: rotate(150deg) translateY(0%); /* Back to initial position */
     }
 }
 
 @keyframes zwaaien2{
     0%{
-        rotate: 180deg;
-        top: 15%;
+   
+        transform: rotate(210deg) translateY(0%);
     }
 
     33%{
-        top: 20%;
-        rotate: 230deg;
+        transform: rotate(270deg) translateY(-5%);
     }
 
     66%{
-        top: 25%;
-        rotate: 180deg;
+        transform: rotate(210deg) translateY(-10%);
     }
     100%{
-        rotate: 180deg;
-        top: 15%;
+        transform: rotate(210deg) translateY(0%);
     }
 }
 
@@ -367,3 +350,33 @@ rotate: 180deg;
         transform: rotateX(20deg);
     }
 }
+
+@container (max-width: 100px) {
+    section:has(> div) > div:first-child {
+        width: 65%;
+    }
+   
+  }
+
+  @container (max-width: 130px) {
+    section:has(> div) > div:nth-child(3) > div:first-child > div:first-child{
+        left: 30%;
+        bottom: -30%;
+        &::after{
+            content:none;
+        }
+        &::before{
+            bottom: -200%;
+        }
+    }
+    section:has(> div) > div:nth-child(4) > div:first-child > div:first-child{
+        left: 0%;
+        bottom: -30%;
+        &::after{
+            content:none;
+        }
+        &::before{
+            bottom: -200%;
+        }
+    }
+  }
