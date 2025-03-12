@@ -91,6 +91,11 @@ section:has(> div){
                 height: 40%; 
                 border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
                 background-color: black;
+                cursor:pointer;
+
+                & > input[type="checkbox"] {
+                    display: none;
+                }
             }
 
             /* teeth left*/
@@ -380,3 +385,19 @@ rotate: 180deg;
         }
     }
   }
+
+
+:root:has([value="raccoon"]:checked) {
+	--colors:raccoon;
+}
+
+@container style(--colors:raccoon) {
+	section:has(> div) {
+		--primary-color-groundhog:#646464;
+    --secondary-color-groundhog:#303030;
+    --third-color-groundhog:#444444;
+    --claw-color-groundhog:#330000;
+    --border-color: black;
+    --white:rgb(0, 0, 0);
+	}
+}
