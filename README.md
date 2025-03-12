@@ -97,3 +97,11 @@ van 290 lines naar 219
 ### vooruitgang
 
 ### volgende week
+
+## bronnen
+
+https://thoughtbot.com/blog/transitions-and-transforms
+
+https://thoughtbot.com/blog/css-animation-for-beginners
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/transition
