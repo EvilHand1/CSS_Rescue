@@ -305,34 +305,28 @@ rotate: 180deg;
 
 @keyframes zwaaien1 {
     0% {
-        transform: rotate(150deg) translateY(0%); /* Initial position */
+        transform: rotate(150deg) translateY(0%);
     }
     33% {
-        transform: rotate(90deg) translateY(-5%); /* Move down */
+        transform: rotate(90deg) translateY(-5%);
     }
     66% {
-        transform: rotate(150deg) translateY(-10%); /* Move further down */
+        transform: rotate(150deg) translateY(-10%);
     }
     100% {
-        transform: rotate(150deg) translateY(0%); /* Back to initial position */
+        transform: rotate(150deg) translateY(0%);
     }
 }
 
 @keyframes zwaaien2{
-    0%{
-   
+    0%, 100%{   
         transform: rotate(210deg) translateY(0%);
     }
-
     33%{
         transform: rotate(270deg) translateY(-5%);
     }
-
     66%{
         transform: rotate(210deg) translateY(-10%);
-    }
-    100%{
-        transform: rotate(210deg) translateY(0%);
     }
 }
 
