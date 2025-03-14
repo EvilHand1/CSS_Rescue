@@ -208,7 +208,7 @@ section:has(> div){
         animation-iteration-count: 5;
         animation-range-start: 10px;
 
-         /* The claw on the left hand */
+         /* The claw on the right hand */
         & :first-child > :first-child{
             /* middle claw */
             rotate: -95deg;
@@ -247,6 +247,7 @@ section:has(> div){
         width: 70%;
         height: 30%; 
         background-color: var(--claw-color-groundhog);
+        z-index: -1;
     }
 }
 

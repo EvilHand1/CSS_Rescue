@@ -86,10 +86,103 @@ css origin-top: https://www.w3schools.com/cssref/css3_pr_transform-origin.php
 
 # Proces week 3
 
+#### bever
+Deze week was het plan om de groundhog af te maken en te beginnen aan de content van de timeline. De groundhog had nog handen en klauwen nodig, dus daar was mee begonnen. Eerst had ik elke klauw een apart object gemaakt. 
+
+```
+<div></div>klauw links
+<div></div>klauw midden
+<div></div>klauw rechts
+```
+
+Dit kon beter dus ik ging kijken om een before en after te gebruiken. Dat liet de code er stukken beter uit zien.
+
+![alt text](images/image-10.png)
+
+#### animatie
+Daarna waren de voeten aan de beurt, maar aangezien er nog veel moest gebeuren besloot ik die over te slaan en in plaats daarvan de graaf animatie te maken. Na een tijdje experimenteren had ik een graaf animatie dit ik wel leuk vond. Toen ik het later aan Sanne liet zien zei hij dat de manier waarop ik had gedaan fout was. Ik gebruikte 'top', maar voor animaties gebruik je 'transform' omdat 'top' dingen op de pagina kan verplaatsen en transform niet.
+
+```
+/* oude code */
+@keyframes zwaaien1{
+    0%{
+        rotate: 185deg;
+        top: 15%;
+    }
+    33%{
+        top: 20%;
+        rotate: 140deg;
+    }
+    66%{
+        top: 25%;
+        rotate: 185deg;
+    }
+    100%{
+        rotate: 185deg;
+        top: 15%;
+    }
+}
+/* nieuw code */
+@keyframes zwaaien1 {
+    0%, 100% {
+        transform: rotate(150deg) translateY(0%);
+    }
+    33% {
+        transform: rotate(90deg) translateY(-5%);
+    }
+    66% {
+        transform: rotate(150deg) translateY(-10%);
+    }
+}
+```
+
+Ik was op zoek naar een manier om de graaf animatie meerdere keren te laten spelen terwijl je scrollt en ik kwam er niet uit. Dus ik ging naar Sanne om hulp te vragen. Hij liet me 'animation-iteration-count' zien en dat was dat probleem opgelost.
+
+![alt text](images/digGif.gif)
+
+#### border
+Sanne keek ook door me code heen en heeft ervoor gezorgd dat de border op elk onderdeel hetzelfde is doormiddel van een variabel.
+
+```
+--size-line:calc(  var(--size-bosmarmot) / 100);
+```
+
+#### code cleaning
+Hij gaf me ook als tip om nog een keer mijn code opnieuw te schrijven, omdat ik nu in theorie beter ben. Dus ik ging kijken wat ik allemaal kon weghalen/verbeteren. Ik begon met de tanden die hetzelfde zijn behalve de locatie. Hetzelfde deed ik met de klauwen.
 
 ![alt text](images/image-7.png)
+![alt text](images/image-9.png)
 
-van 290 lines naar 219
+Vervolgens had ik het idee dat het wel goed was, maar toen ik verder dacht kreeg ik een idee om een functie te maken die op alle kinderen toegepast wordt. Hierin heb ik vervolgens de position, border, primary color en de border-radius ingezet. Deze kon ik vervolgens weghalen bij de rest van mijn code. Nu is er ook een standaard kleur en vorm, tenzij ik het anders aangeef.
+```
+& :nth-child(1n){
+        position:absolute;
+        border: var(--size-line) solid var(--border-color);
+        background-color: var(--primary-color-groundhog);
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    }
+```
+
+Ik heb ook de handen en middelste klauw verandert dat ze samen worden aangeroepen in plaats van apart.
+
+```
+/* Left and right hands */
+    > :nth-of-type(3) > :first-child, 
+    >:nth-of-type(4) > :first-child{  
+        bottom: -10%;
+        width: 125%;
+        height: 30%; 
+        left: -15%;
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    }    
+```
+
+Ik ben uiteindelijk van 290 lijnen code naar 220 gegaan, en misschien kan het nog minder, maar ik momenteel niet weten hoe.
+
+## expirementeren
+
+####
+
 ## feedback, vooruitgang & volgende week
 
 ### Feedback
