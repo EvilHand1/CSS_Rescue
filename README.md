@@ -89,7 +89,7 @@ css origin-top: https://www.w3schools.com/cssref/css3_pr_transform-origin.php
 #### bever
 Deze week was het plan om de groundhog af te maken en te beginnen aan de content van de timeline. De groundhog had nog handen en klauwen nodig, dus daar was mee begonnen. Eerst had ik elke klauw een apart object gemaakt. 
 
-```
+```html
 <div></div>klauw links
 <div></div>klauw midden
 <div></div>klauw rechts
@@ -102,7 +102,7 @@ Dit kon beter dus ik ging kijken om een before en after te gebruiken. Dat liet d
 #### animatie
 Daarna waren de voeten aan de beurt, maar aangezien er nog veel moest gebeuren besloot ik die over te slaan en in plaats daarvan de graaf animatie te maken. Na een tijdje experimenteren had ik een graaf animatie dit ik wel leuk vond. Toen ik het later aan Sanne liet zien zei hij dat de manier waarop ik had gedaan fout was. Ik gebruikte 'top', maar voor animaties gebruik je 'transform' omdat 'top' dingen op de pagina kan verplaatsen en transform niet.
 
-```
+```css
 /* oude code */
 @keyframes zwaaien1{
     0%{
@@ -154,7 +154,7 @@ Hij gaf me ook als tip om nog een keer mijn code opnieuw te schrijven, omdat ik 
 ![alt text](images/image-9.png)
 
 Vervolgens had ik het idee dat het wel goed was, maar toen ik verder dacht kreeg ik een idee om een functie te maken die op alle kinderen toegepast wordt. Hierin heb ik vervolgens de position, border, primary color en de border-radius ingezet. Deze kon ik vervolgens weghalen bij de rest van mijn code. Nu is er ook een standaard kleur en vorm, tenzij ik het anders aangeef.
-```
+```css
 & :nth-child(1n){
         position:absolute;
         border: var(--size-line) solid var(--border-color);
@@ -165,7 +165,7 @@ Vervolgens had ik het idee dat het wel goed was, maar toen ik verder dacht kreeg
 
 Ik heb ook de handen en middelste klauw verandert dat ze samen worden aangeroepen in plaats van apart.
 
-```
+```css
 /* Left and right hands */
     > :nth-of-type(3) > :first-child, 
     >:nth-of-type(4) > :first-child{  
@@ -185,13 +185,13 @@ Ik ben uiteindelijk van 290 lijnen code naar 220 gegaan, en misschien kan het no
 
 Een groot gedeelte van de opdracht is de timeline. Het idee is dat je scrollt en dat de groundhog graaft en je dan stukken van de film tegenkomt. Ik moet ergens hierin style of container queries gebruiken. En hiermee liep ik heel erg vast. De code werkte niet en ik werd gefrusteerd. Uiteindelijk heb ik gewwon een plaatje en verder niks. De code die ik had heb ik weggegooid. Ik wou hetzelfde doen als hier beneden staat.
 
-**plaatje van inspiratie**
+![alt text](images/TimelineInspiration.gif)
 
 #### groundhog tot leven brengen
 
 Ik was tevreden met de groundhog, maar het miste nog iets kwa leven. Dus ik dacht, wat brengt leven, ogen laten knipperen. De ogen heb ik gemaakt met een background radial gradient. Ik had een paar dingen geprobeerd, maar ben uiteindelijk op nog een radial gradient gekomen gebasseerd op een variabel die wordt verandert in een animatie.
 
-```
+```css
 background-image:
         radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
         radial-gradient(
@@ -215,13 +215,13 @@ background-image:
 
 Vervolgens heb ik de oren ook een kleine wiggle gegeven door de rotation aan te passen.
 
-**GIF MOMENT**
+![alt text](images/Blink.gif)
 
 #### hover
 
 Op het hoofd heb ik een hover toegevoegd die het hoofd klein maakt, de ogen veranderen en de oren spits maakt.
 
-```
+```css
 &:hover{
         width: 35%;
         height: 20%;
@@ -244,13 +244,13 @@ Op het hoofd heb ik een hover toegevoegd die het hoofd klein maakt, de ogen vera
      }
 ```
 
-***GIF MOMENT
+![alt text](images/HeadHover.gif)
 
 #### style querie
 
 Ik moest ergens style queries toevoegen, maar het op de timeline toevoegen gaf me stress. Dus ik had het idee om als je op de neus klikt, de groundhog helemaal van kleur verandert. Dit heb ik met behulp van Sannes codepen gemaakt.
 
-```
+```css
  <label><div><input type="checkbox" name="radio" value="raccoon"></div></label><!--neus-->
 
 /* stukje van de neus */
@@ -274,13 +274,13 @@ cursor:pointer;
 }
 ```
 
-***INSERT GIF***
+![alt text](images/NoseButton.gif)
 
 #### Container querie
 
 Ik wou ook ergens containers queries gebruiken, maar met de timeline kwam ik er niet uit dus ik ging weer terug naar de bosmarmot. Een ding wat ik niet mooi vind eraan is de klauwen. Als het scherm te klein wordt zien ze er niet meer goed uit, dus mijn idee was om bij een bepaalde grootte een klauw uit te zetten, zodat de de 2 die overblijven groter kunnen zijn. En als het scherm nog kleiner is dat de klauwen helemaal verdwijnen. Iets waar ik heel erg mee vast liep is dat de buik later veranderde dan de klauwen en ik kwam er maar niet achter waarom. Ik had 'container-type' op de verkeerde plek gezet.
 
-```
+```css
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries */
 @container (max-width: 90px) {
     section:has(> div) > div:first-child {
@@ -311,17 +311,21 @@ Ik wou ook ergens containers queries gebruiken, maar met de timeline kwam ik er 
   }
 ```
 
-** GIF MOMENT**
+![alt text](images/clawDissapear.gif)
 
 #### control panel test
 
 Helemaal aan het begin van de opdracht kregen we de optie welke we wouden doen. Ik koos timeline omdat die me het makkelijkst leek, en nadat ik de film had gezien vond ik mijn idee ook leuk. Maar ik had ook een idee voor een control panel, alleen wist ik niet hoe ik dat wou doen. Maar nu heb ik die bosmarmot en ik kijk heel erg op tegen de timeline. Dus ik dacht ik ga experimenteren hiermee. In codepen heb ik een animatie gemaakt van flikkeren en samen met chatGPT (ookal was het meerendeels slecht) heb ik ervoor gezorgd dat het object verschijnt na de animatie.
 
-*** GIF MOMENT***
+![alt text](images/AppearTest.gif)
+
+![alt text](images/Inspiration.gif)
 
 Hierna moest ik het toepassen op mijn code, die niet gebouwd is op interactie dus er waren heel veel errors. De manier waarop ik de code had gemaakt in de codepen werkte niet in het project, want ik had de logica omgedraaid. In de codepen was de achtergrond transparent totdat je klikte op de knop en dan kreeg het een kleur. In mijn project wil ik ook dat het transparent begint, maar alle logica staat diep genest en ik vind het daar ook fijn staan. Dus ik moest de logica omdraaien dat als de button niet gechecked het invisble is en zodra die gechecked is gaat hij de animatie afspelen van de flikker. Ook omdat er verschillende onderdelene zijn, wil ik de animatie deel voor deel afspelen, wat waarschijnlijk ook een slechte manier is gedaan. Dit kan uiteraad beter, maar het werkt.
 
-```
+```css
+<label><input type="radio" name="radio" value="--arm"></label><!--body fur-->
+
 section:has(input[value="--arm"]:not(:checked)) section:has(> div) > div:nth-child(3){
     border: transparent;
     background-color: transparent;
@@ -374,7 +378,7 @@ section:has(input[value="--arm"]:checked) section:has(> div) > div:nth-child(3){
     }
   }
 ```
-***GIF MOMENT***
+![alt text](images/ArmAppears.gif)
 
 ## feedback, vooruitgang & volgende week
 
@@ -382,4 +386,14 @@ section:has(input[value="--arm"]:checked) section:has(> div) > div:nth-child(3){
 
 ### vooruitgang
 
+* bosmarmot heeft klauwen
+
+* bosmarmot graaft
+
+* bosmarmot knippert
+
+* soort van container en style queries gebruikt?
+
 ### volgende week
+
+* de timeline
