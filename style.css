@@ -418,12 +418,6 @@ section:has(input[value="--arm"]:checked) section:has(> div) > div:nth-child(3){
     }
 }
 
-/* animation: zwaaien1 linear;
-        animation-timeline: scroll();
-        animation-iteration-count: 5;
-        animation-range-start: 30px;
- */
-
 @keyframes invisible {
     0%, 100%{
         border-color: transparent;
