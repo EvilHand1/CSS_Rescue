@@ -181,7 +181,200 @@ Ik ben uiteindelijk van 290 lijnen code naar 220 gegaan, en misschien kan het no
 
 ## expirementeren
 
-####
+#### timeline
+
+Een groot gedeelte van de opdracht is de timeline. Het idee is dat je scrollt en dat de groundhog graaft en je dan stukken van de film tegenkomt. Ik moet ergens hierin style of container queries gebruiken. En hiermee liep ik heel erg vast. De code werkte niet en ik werd gefrusteerd. Uiteindelijk heb ik gewwon een plaatje en verder niks. De code die ik had heb ik weggegooid. Ik wou hetzelfde doen als hier beneden staat.
+
+**plaatje van inspiratie**
+
+#### groundhog tot leven brengen
+
+Ik was tevreden met de groundhog, maar het miste nog iets kwa leven. Dus ik dacht, wat brengt leven, ogen laten knipperen. De ogen heb ik gemaakt met een background radial gradient. Ik had een paar dingen geprobeerd, maar ben uiteindelijk op nog een radial gradient gekomen gebasseerd op een variabel die wordt verandert in een animatie.
+
+```
+background-image:
+        radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
+        radial-gradient(
+        circle at bottom right, 
+           black 50%,
+           white 0
+             );
+             
+             animation: blink 2s infinite;
+
+@keyframes blink {
+    0% {
+        --eye-closed: 75%;
+    }
+    30%{
+        --eye-closed: 0%;
+    }
+
+}
+```
+
+Vervolgens heb ik de oren ook een kleine wiggle gegeven door de rotation aan te passen.
+
+**GIF MOMENT**
+
+#### hover
+
+Op het hoofd heb ik een hover toegevoegd die het hoofd klein maakt, de ogen veranderen en de oren spits maakt.
+
+```
+&:hover{
+        width: 35%;
+        height: 20%;
+        /* eyes */
+        >:nth-child(2), >:nth-child(3){
+            background-image:
+            radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
+            radial-gradient(
+            circle at center, 
+               black 30%,
+               white 0
+                 );
+        }
+        /* ears */
+        >:nth-child(4),
+        >:nth-child(5){
+            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+            rotate: -50deg;
+         }
+     }
+```
+
+***GIF MOMENT
+
+#### style querie
+
+Ik moest ergens style queries toevoegen, maar het op de timeline toevoegen gaf me stress. Dus ik had het idee om als je op de neus klikt, de groundhog helemaal van kleur verandert. Dit heb ik met behulp van Sannes codepen gemaakt.
+
+```
+ <label><div><input type="checkbox" name="radio" value="raccoon"></div></label><!--neus-->
+
+/* stukje van de neus */
+cursor:pointer;
+& > input[type="checkbox"] {
+ display: none;
+}
+
+ /* https://codepen.io/shooft/pen/jORqgdg?editors=1100 */
+:root:has([value="raccoon"]:checked) {
+	--colors:raccoon;
+}
+
+@container style(--colors:raccoon) {
+	section:has(> div) {
+		--primary-color-groundhog:#646464;
+    --secondary-color-groundhog:#303030;
+    --third-color-groundhog:#444444;
+    --claw-color-groundhog:#330000;
+	}
+}
+```
+
+***INSERT GIF***
+
+#### Container querie
+
+Ik wou ook ergens containers queries gebruiken, maar met de timeline kwam ik er niet uit dus ik ging weer terug naar de bosmarmot. Een ding wat ik niet mooi vind eraan is de klauwen. Als het scherm te klein wordt zien ze er niet meer goed uit, dus mijn idee was om bij een bepaalde grootte een klauw uit te zetten, zodat de de 2 die overblijven groter kunnen zijn. En als het scherm nog kleiner is dat de klauwen helemaal verdwijnen. Iets waar ik heel erg mee vast liep is dat de buik later veranderde dan de klauwen en ik kwam er maar niet achter waarom. Ik had 'container-type' op de verkeerde plek gezet.
+
+```
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries */
+@container (max-width: 90px) {
+    section:has(> div) > div:first-child {
+        width: 65%;
+    }
+   
+    section:has(> div) > div:nth-child(3) > div:first-child > div:first-child,
+    section:has(> div) > div:nth-child(4) > div:first-child > div:first-child{
+        display: none;
+    }
+  }
+
+  @container (max-width: 130px) {
+    section:has(> div) > div:nth-child(3) > div:first-child > div:first-child,
+    section:has(> div) > div:nth-child(4) > div:first-child > div:first-child{
+        left: 30%;
+        bottom: -30%;
+        &::after{
+            content:none;
+        }
+        &::before{
+            bottom: -200%;
+        }
+    }
+    section:has(> div) > div:nth-child(4) > div:first-child > div:first-child{
+        left: 0%;
+    }
+  }
+```
+
+** GIF MOMENT**
+
+#### control panel test
+
+Helemaal aan het begin van de opdracht kregen we de optie welke we wouden doen. Ik koos timeline omdat die me het makkelijkst leek, en nadat ik de film had gezien vond ik mijn idee ook leuk. Maar ik had ook een idee voor een control panel, alleen wist ik niet hoe ik dat wou doen. Maar nu heb ik die bosmarmot en ik kijk heel erg op tegen de timeline. Dus ik dacht ik ga experimenteren hiermee. In codepen heb ik een animatie gemaakt van flikkeren en samen met chatGPT (ookal was het meerendeels slecht) heb ik ervoor gezorgd dat het object verschijnt na de animatie.
+
+*** GIF MOMENT***
+
+Hierna moest ik het toepassen op mijn code, die niet gebouwd is op interactie dus er waren heel veel errors. De manier waarop ik de code had gemaakt in de codepen werkte niet in het project, want ik had de logica omgedraaid. In de codepen was de achtergrond transparent totdat je klikte op de knop en dan kreeg het een kleur. In mijn project wil ik ook dat het transparent begint, maar alle logica staat diep genest en ik vind het daar ook fijn staan. Dus ik moest de logica omdraaien dat als de button niet gechecked het invisble is en zodra die gechecked is gaat hij de animatie afspelen van de flikker. Ook omdat er verschillende onderdelene zijn, wil ik de animatie deel voor deel afspelen, wat waarschijnlijk ook een slechte manier is gedaan. Dit kan uiteraad beter, maar het werkt.
+
+```
+section:has(input[value="--arm"]:not(:checked)) section:has(> div) > div:nth-child(3){
+    border: transparent;
+    background-color: transparent;
+    &> :first-child{
+        border: transparent;
+        background-color: transparent;
+        &> :first-child{
+            border: transparent;
+            background-color: transparent;
+            &::after, &::before{
+                border: transparent;
+                background-color: transparent;
+            }
+        }
+    }
+    
+}
+
+section:has(input[value="--arm"]:checked) section:has(> div) > div:nth-child(3){
+    animation: flickerBorder 1s linear, zwaaien1 linear;
+    animation-timeline: auto, scroll();
+    animation-range-start: 0, 30px;
+    animation-iteration-count: 1, 5;
+    &> :first-child{
+        animation:invisible 1s linear, flickerBorder 1s linear 1s; 
+    
+        &> :first-child{
+            animation: invisible 2s linear, flickerBorder 1s linear 2s;
+            &::after, &::before{
+                animation: invisible 2s linear, flickerBorder 1s linear 2s; 
+            }
+        }
+    }
+}
+
+@keyframes invisible {
+    0%, 100%{
+        border-color: transparent;
+      background-color: transparent;
+    }
+}
+@keyframes flickerBorder {
+    0%, 20%, 40%, 60%, 80%, 100%{
+      border-color: transparent;
+      background-color: transparent;
+    }
+    10%, 30%, 50%, 70%, 90% {
+      border-color: white;
+      background-color: transparent;
+    }
+  }
+```
+***GIF MOMENT***
 
 ## feedback, vooruitgang & volgende week
 
