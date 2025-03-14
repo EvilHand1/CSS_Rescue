@@ -140,7 +140,6 @@ section:has(> div){
 
     /* right eye */
     & > :nth-child(3){
-        top: 20%;
         left: 60%;
         background-image:
         radial-gradient(
@@ -169,38 +168,41 @@ section:has(> div){
            var(--third-color-groundhog) .6vw,
          var(--primary-color-groundhog) 0
              );
-transition: transform 0.3s ease-in-out; 
-             animation: earWiggle 2s infinite ease-in-out;    
-             transition: all 1s;     
+
+         
+        animation: earWiggle 2s infinite ease-in-out;    
+        transition: all .5s;     
     }
    
     /* right ear */
     & :nth-child(5){
         top: -5%;
         left: 70%;
-        animation: earWiggle 1s infinite ease-in-out;
+        animation-delay: 1s;
     }
 
-&:hover > :nth-child(3),
-&:hover > :nth-child(2){
-    background-image:
-        radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
-        radial-gradient(
-        circle at center, 
-           black 30%,
-           white 0
-             );
-}
-
-    &:hover > :nth-child(4),
-    &:hover > :nth-child(5){
-        border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
-        rotate: -50deg;
-     }
-     &:hover{
+    &:hover{
         width: 35%;
         height: 20%;
+        /* eyes */
+        >:nth-child(2), >:nth-child(3){
+            background-image:
+            radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
+            radial-gradient(
+            circle at center, 
+               black 30%,
+               white 0
+                 );
+        }
+        /* ears */
+        >:nth-child(4),
+        >:nth-child(5){
+            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+            rotate: -50deg;
+         }
      }
+     
+    
 
     }
     /* left arm */
@@ -346,20 +348,26 @@ rotate: 180deg;
         transform: rotateX(0deg);
     }
     50%{
-        transform: rotateX(20deg);
+        transform: rotateX(30deg);
     }
 }
 
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries */
-@container (max-width: 100px) {
+@container (max-width: 90px) {
     section:has(> div) > div:first-child {
         width: 65%;
     }
    
+    section:has(> div) > div:nth-child(3) > div:first-child > div:first-child,
+    section:has(> div) > div:nth-child(4) > div:first-child > div:first-child{
+        display: none;
+    }
+
   }
 
   @container (max-width: 130px) {
-    section:has(> div) > div:nth-child(3) > div:first-child > div:first-child{
+    section:has(> div) > div:nth-child(3) > div:first-child > div:first-child,
+    section:has(> div) > div:nth-child(4) > div:first-child > div:first-child{
         left: 30%;
         bottom: -30%;
         &::after{
@@ -371,15 +379,9 @@ rotate: 180deg;
     }
     section:has(> div) > div:nth-child(4) > div:first-child > div:first-child{
         left: 0%;
-        bottom: -30%;
-        &::after{
-            content:none;
-        }
-        &::before{
-            bottom: -200%;
-        }
     }
   }
+
 
 
   /* https://codepen.io/shooft/pen/jORqgdg?editors=1100 */
@@ -393,7 +395,5 @@ rotate: 180deg;
     --secondary-color-groundhog:#303030;
     --third-color-groundhog:#444444;
     --claw-color-groundhog:#330000;
-    --border-color: black;
-    --white:rgb(0, 0, 0);
 	}
 }
