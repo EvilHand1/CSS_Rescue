@@ -1,0 +1,269 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+:root{
+    --primary-color: #C3EEFA;
+    --secondary-color: #805D3C;
+    --size-bosmarmot:20dvw;
+}
+body{
+    min-block-size: 600dvh;
+    background: linear-gradient(
+        to bottom,
+        var(--primary-color) 0 calc(var(--size-bosmarmot) * 0.8),
+        var(--secondary-color) 0 100%
+    );
+    margin:0;
+    /* height: 100dvh; */
+    display:grid;
+    place-items: center;
+}
+
+/* DE BOSMARMOT */
+
+
+section:has(section){
+    --size-line:calc(  var(--size-bosmarmot) / 100);
+    width: var(--size-bosmarmot);
+    aspect-ratio: 35/40;
+    position: fixed;
+    top: calc(var(--size-bosmarmot) * 0.6);
+    animation: draaien linear;
+    animation-timeline: scroll();
+    animation-range-start: 30px;
+    animation-iteration-count: 5;
+    
+    container-type: inline-size;
+
+    & :nth-child(1n){
+        position:absolute;
+        border: var(--size-line) solid var(--border-color);
+        background-color: var(--primary-color-groundhog);
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    }
+}
+
+section:has(> div){
+    /* color pallete: https://www.color-hex.com/color-palette/1032945 */
+    --primary-color-groundhog:#613522;
+    --secondary-color-groundhog:#815d4e;
+    --third-color-groundhog:#a0867a;
+    --claw-color-groundhog:#dfd7d3;
+    --border-color: black;
+    --white:white;
+
+    width:100%;
+    height:100%;
+    display:grid;
+    justify-items: center;
+    /* fur */
+    & > label:first-child{
+        top: 10%;
+        width: 75%;
+        height: 85%;
+        background-color: var(--secondary-color-groundhog);
+               &:has(input[value="--arm"]:not(:checked)){
+                    cursor:pointer;
+                }
+            }
+    /* head */
+    & > :nth-child(2){
+        bottom: 90%;
+        width: 55%;
+        height: 40%;
+        transition: all 1s;     
+    }
+    /* left arm */
+    & > fieldset:first-of-type{
+        transform-origin: top;
+        top: 15%;
+        left: 10%;
+        width: 20%;
+        height: 60%; 
+        rotate: 35deg;
+        display:grid;
+        
+        & label:not(:last-child) {
+            grid-area:1/1;	
+            pointer-events:none;
+            opacity:0;	
+            width:100%;
+            height:100%;	
+            display:grid;
+            place-items:center; 
+            &:has( :checked ) + label,
+            &:first-child:has( ~ label:nth-last-child(2) :checked ){
+                pointer-events:all;
+            } 
+        }
+        
+        
+       
+        
+        /* The claw on the left hand */
+        & >label:has(div) > :first-child{
+            /* middle claw */
+            rotate: 95deg;
+            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;            
+
+            /* right claw */
+            &::after, &::before{
+                content:"";
+                position:absolute;
+                bottom: 150%;
+                width: 110%;
+                height: 120%;
+                background-color: var(--claw-color-groundhog);
+                border: var(--size-line) solid var(--border-color);
+                border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+            }
+            /* left claw */
+            &::before{
+                bottom: -150%; 
+            }
+        }
+    }
+
+    /* Left and right hands */
+    & > fieldset:first-of-type > label:has(div){ 
+        bottom: -10%;
+        width: 125%;
+        height: 30%; 
+        left: -15%;
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    }    
+    /* the middle claws on the right and left hand */
+   & >fieldset:first-of-type > label:has(div) > :first-child{  
+        bottom: -20%;
+        left: 10%;
+        width: 70%;
+        height: 30%; 
+        background-color: var(--claw-color-groundhog);
+        z-index: -1;
+    }
+
+}
+
+
+
+input {
+	display:none;
+}
+
+
+
+section:has(input[value="--Middle"]:checked) section:has(> div) > :nth-child(3){
+    transform: rotate(40deg);
+}
+
+section:has(input[value="--Top"]:checked) section:has(> div) > :nth-child(3){
+    transform: rotate(80deg);
+}
+
+
+/* arm appears */
+  section:has(input[value="--arm"]:not(:checked)) section:has(> div) > fieldset:first-of-type{
+    border: transparent;
+    background-color: transparent;
+    &>label:has(div){
+        border: transparent;
+        background-color: transparent;
+    }
+}
+
+section:has(input[value="--arm"]:checked) section:has(> div) > fieldset:first-of-type{
+    animation: flickerBorder 1s linear, zwaaien1 linear;
+    animation-timeline: auto, scroll();
+    animation-range-start: 0, 30px;
+    animation-iteration-count: 1, 5;
+    &>label:has(div){
+        animation:invisible 1s linear, flickerBorder 1s linear 1s; 
+        }
+    }
+
+
+@keyframes invisible {
+    0%, 100%{
+        border-color: transparent;
+      background-color: transparent;
+    }
+}
+@keyframes flickerBorder {
+    0%, 20%, 40%, 60%, 80%, 100%{
+      border-color: transparent;
+      background-color: transparent;
+    }
+    10%, 30%, 50%, 70%, 90% {
+      border-color: white;
+      background-color: transparent;
+    }
+  }
+
+
+  section:has(input[value="--RightClaw"]:not(:checked)) section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{
+    display:none;
+   }
+   
+   section:has(input[value="--RightClaw"]:checked) section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{
+    animation: claw .5s linear;
+      }
+   
+   
+   @keyframes claw {
+   0% {
+       bottom: 35%;
+   }
+   100%{
+       bottom: -20%;
+   }
+   }
+
+   section:has(input[value="--Top"]:not(:checked)) section:has(> div) > :nth-child(2){
+ display: none;
+ }
+   section:has(input[value="--Top"]:checked) section:has(> div){
+   & > :nth-child(2){
+    animation: HeadBalloon 2s linear;
+    }
+
+    & > fieldset:first-of-type{
+        animation: LowerLeftArm 2s linear forwards;
+        & > label:not(:last-child){
+            pointer-events: none;
+        }
+    }
+}
+
+@keyframes HeadBalloon {
+    0%{
+        transform-origin: bottom;
+        transform:scaleY(0%) translateY(50%);
+        z-index: -1;
+    }
+
+    40%, 60%{
+        transform: scaleY(50%) translateY(50%);
+        z-index: -1;
+    }
+
+    90%{
+        transform:translateY(-25%);
+    }
+    100%{
+        transform:scaleY(100%) translateY(0%);
+    }
+
+}
+
+@keyframes LowerLeftArm {
+    0%{
+        transform: rotate(80deg);
+    }
+    100%{
+        transform: rotate(0deg)
+    }
+}

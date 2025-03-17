@@ -66,10 +66,14 @@ section:has(> div){
         width: 75%;
         height: 85%;
         background-color: var(--secondary-color-groundhog);
-        cursor:pointer;
-                /* & input[type="radio"] {
+     
+                & input[type="radio"] {
                     display: none;
-                } */
+                }
+
+               &:has(input[value="--arm"]:not(:checked)){
+                    cursor:pointer;
+                }
             }
     /* head */
     & > :nth-child(2){
@@ -216,6 +220,12 @@ transition: transform 0.3s ease-in-out;
         height: 60%; 
         rotate: 35deg;
 
+        &>button{
+        transform-origin: top;
+        height: 100%;
+        width: 100%;
+        background-color: red;
+        }
         
         /* The claw on the left hand */
         & > :first-child > :first-child{
@@ -272,8 +282,8 @@ transition: transform 0.3s ease-in-out;
         }
     }
     /* Left and right hands */
-    > :nth-of-type(2) > :first-child, 
-    >:nth-of-type(3) > :first-child{  
+    > :nth-of-type(2) > :nth-child(1), 
+    >:nth-of-type(4) > :first-child{  
         bottom: -10%;
         width: 125%;
         height: 30%; 
@@ -383,7 +393,7 @@ rotate: 180deg;
   }
 
 
-  section:has(input[value="--arm"]:not(:checked)) section:has(> div) > div:nth-child(3){
+  /* section:has(input[value="--arm"]:not(:checked)) section:has(> div) > :nth-child(3){
     border: transparent;
     background-color: transparent;
     &> :first-child{
@@ -398,10 +408,41 @@ rotate: 180deg;
             }
         }
     }
-    
+} */
+
+section:has(input[value="--Low"]:checked) section:has(> div) > :nth-child(3){
+    transform: rotate(25deg);
+    & input[value="--Top"], & input[value="--Low"]{
+       pointer-events: none;
+       z-index: -1;
+    }
+}
+section:has(input[value="--Middle"]:checked) section:has(> div) > :nth-child(3){
+    transform: rotate(50deg);
+    & input[value="--Middle"], & input[value="--Low"] {
+        pointer-events: none;
+        z-index: -1;
+    }
+}
+section:has(input[value="--Top"]:checked) section:has(> div) > :nth-child(3){
+    transform: rotate(75deg);
+    & input[value="--Top"], & input[value="--Low"] {
+        pointer-events: none;
+        z-index: -1;
+    }
 }
 
-section:has(input[value="--arm"]:checked) section:has(> div) > div:nth-child(3){
+section:has(input[value="--Top"]:not(:checked)) section:has(> div) > :nth-child(2){
+    display:none;
+}
+section:has(input[value="--Top"]:checked) section:has(> div) > :nth-child(2){
+    animation: flickerBorder 1s linear;
+}
+
+
+
+
+/* section:has(input[value="--arm"]:checked) section:has(> div) > :nth-child(3){
     animation: flickerBorder 1s linear, zwaaien1 linear;
     animation-timeline: auto, scroll();
     animation-range-start: 0, 30px;
@@ -416,6 +457,24 @@ section:has(input[value="--arm"]:checked) section:has(> div) > div:nth-child(3){
             }
         }
     }
+} */
+
+section:has(input[value="--RightClaw"]:not(:checked)) section:has(> div) > :nth-child(4) > :first-child > :first-child{
+ display:none;
+}
+
+section:has(input[value="--RightClaw"]:checked) section:has(> div) > :nth-child(4) > :first-child > :first-child{
+ animation: claw .5s linear;
+   }
+
+
+@keyframes claw {
+0% {
+    bottom: 35%;
+}
+100%{
+    bottom: -20%;
+}
 }
 
 @keyframes invisible {
