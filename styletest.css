@@ -18,6 +18,11 @@
 
     --Left-Arm-Top: false;
     --Right-Arm-Top: false;
+
+    --Trigger-Nose: false;
+    --Trigger-Ears: false;
+    
+    --Nose-Color: black;
 }
 body{
     min-block-size: 600dvh;
@@ -83,7 +88,114 @@ section:has(> div){
         bottom: 90%;
         width: 55%;
         height: 40%;
-        transition: all 1s;     
+        
+        /* snout */
+        & > :first-child{
+            bottom: 20%;
+            left: 25%;
+            width: 55%;
+            height: 40%; 
+            border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
+            background-color: var(--secondary-color-groundhog);
+            
+
+            & label:not(:last-of-type) {
+                grid-area:1/1;	
+                pointer-events:none;
+                opacity:0;	
+                width:100%;
+                height:100%;	
+                &:has( :checked ) + label{
+                    pointer-events: all;
+                }
+            }
+
+            /* nose */
+            & > label:last-of-type{
+                top: 15%;
+                left: 35%;
+                transform-origin: center;
+                width: 35%;
+                height: 40%; 
+                border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
+                background-color: black;
+               
+            }
+
+            /* teeth left*/
+             & >div:nth-last-of-type(2), &>:last-child{
+                top: 65%;
+                left: 37%;
+                transform-origin: center;
+                width: 15%;
+                height: 30%; 
+                border-radius: 6% 0% 10% 10% / 0% 0% 100% 100%;
+                background-color: #dfd7d3;
+                border-top: none;     
+            }
+
+            /* teeth right */
+            & >:last-child{
+                left: 51%;    
+            }
+        }
+
+        /* left eye */
+    & > :nth-child(2), >:nth-child(3){
+        --eye-closed: 0%;
+        top: 20%;
+        left: 25%;
+        width: 20%;
+        height: 20%;  
+        border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+
+        background-image:
+        radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
+        radial-gradient(
+        circle at bottom right, 
+           black 50%,
+           white 0
+             );
+            }
+
+    /* right eye */
+    & > :nth-child(3){
+        top: 20%;
+        left: 60%;
+        background-image:
+        radial-gradient(
+            circle at top,
+            var(--primary-color-groundhog) var(--eye-closed),
+            var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2),
+            transparent 0),
+        radial-gradient(
+        circle at left, 
+           black 50%,
+         white 0
+             );
+    }
+
+    /* left ear */
+    & > :nth-child(4), & > :nth-child(5){
+        top: -10%;
+        left: 15%;
+        width: 20%;
+        height: 25%;
+        border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+        z-index: -1 ;
+        background-image: 
+        radial-gradient(
+        circle, 
+           var(--third-color-groundhog) .6vw,
+         var(--primary-color-groundhog) 0
+             );
+    }
+   
+    /* right ear */
+    & > :nth-child(5){
+        top: -10%;
+        left: 65%;
+    }
     }
     /* left arm */
     & > fieldset:first-of-type,
@@ -184,7 +296,137 @@ input {
 	display:none;
 }
 
+@container style(--Trigger-Ears:false){
+    section:has(>div){
+        &> fieldset:first-of-type >label:has(div),
+        &> fieldset:nth-of-type(2) >label:has(div){
+                border: transparent;
+                background-color: transparent;
+            }
+        &>:nth-child(2){
+        & > div:nth-of-type(1), & > div:nth-of-type(2){
+            --eye-closed: 75%;
+        }
+        & > div:nth-of-type(3),& > div:nth-of-type(4){
+        display:none;
+    }}
+}}
 
+@container style(--Trigger-Ears:true){
+    section:has(>div){
+        &> fieldset:first-of-type >label:has(div){
+            animation:invisible 3s linear, flickerBorder 1s linear 3s; 
+        }
+        &> fieldset:nth-of-type(2) >label:has(div){
+            animation:invisible 4s linear, flickerBorder 1s linear 4s; 
+        }
+
+    &>:nth-child(2){
+        &> :first-child > label:last-of-type{
+            cursor: normal;
+        }
+
+        &> div:nth-of-type(1), &> div:nth-of-type(2){
+            --eye-closed: 75%;
+            animation: 
+                blink .4s linear 4 2s, 
+                blink 2s linear infinite 3.5s;
+        }
+
+        & > div:nth-of-type(3){
+        animation:TriggerEars 2s linear;
+    }
+    & > div:nth-of-type(4){
+        animation:TriggerEars 2s linear;
+        --first: -40%;
+        --second: -130%;
+        --third:-275%;
+        --fourth:-253%;
+    }}
+}}
+
+@keyframes blink {
+    0% {
+        --eye-closed: 75%;
+    }
+    25%{
+        --eye-closed: 0%;
+    }
+
+}
+
+@keyframes TriggerEars {
+    0%{
+        transform:translate(var(--first, 40%), 75%);
+    }
+    25%{
+        transform:translate(0%, -20%);
+    }
+    50%{
+        transform: translate(var(--second, 130%), -60%);
+    }
+    75%{ 
+        transform: translate(var(--third, 275%), -20%);
+    }
+    100%{
+        transform: translate(var(--fourth, 253%), 0%);
+    }
+}
+
+section:has(input[value="--Rotate-Snout-1"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(160deg);}
+section:has(input[value="--Rotate-Snout-2"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(120deg);}
+section:has(input[value="--Rotate-Snout-3"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(80deg);}
+section:has(input[value="--Rotate-Snout-4"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(40deg);}
+section:has(input[value="--Rotate-Snout-5"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(0deg);}
+
+@container style(--Trigger-Nose:false){
+    section:has(>div){
+        &>:nth-child(2) > :first-child {
+            &>label{
+                cursor:pointer;
+            }
+        & label:last-of-type {
+   display:none;
+       }
+       & >div{
+        display:none;
+    }}
+       
+}}
+@container style(--Trigger-Nose:true){
+   section:has(>div) >:nth-child(2) > :first-child{
+  animation:SnoutCorrect 2s linear forwards .5s;
+   --scale: 3;
+   --rotateY: 180deg;
+        &> label:last-of-type{
+            animation:invisible 1s linear, SnoutCorrect 2s linear 1.5s;
+            --rotateZ: 360deg;
+            --scale: 3;
+            --rotateY: 0deg;
+            cursor:pointer;
+        }
+        & >div{
+            display:none;
+        }
+}}
+
+
+
+
+@keyframes SnoutCorrect {
+0%{
+    transform: scale(1, 1) rotateY(0deg) rotateZ(0deg);
+    z-index: 3;
+}
+50%{
+    transform: scale(var(--scale), var(--scale)) rotateY(var(--rotateY, 0)) rotateZ(var(--rotateZ, 0));
+    z-index: 3;
+}
+100%{
+    transform: scale(1, 1) rotateY(var(--rotateY, 0)) rotateZ(calc(var(--rotateZ, 0deg) * 2));
+    z-index: 3;
+}
+}
 
 section:has(input[value="--Left-Arm-1"]:checked) section:has(> div) > :nth-child(3){transform: rotate(10deg);}
 section:has(input[value="--Left-Arm-2"]:checked) section:has(> div) > :nth-child(3){transform: rotate(30deg);}
@@ -208,25 +450,15 @@ idea to change it to container style queres came from Dante
         &>fieldset:nth-of-type(2) > label{
             --arm-pointer-events: none;
             cursor:default;
-            
         }
         &> fieldset:first-of-type{
-            /* border: transparent;
-            background-color: transparent; */
-    
-            &>label:has(div){
-                border: transparent;
-                background-color: transparent;
-            }
+            border: transparent;
+            background-color: transparent;
         }
         &> fieldset:nth-of-type(2){
-            /* border: transparent;
-            background-color: transparent; */
+            border: transparent;
+            background-color: transparent;
             pointer-events: none;
-            &>label:has(div){
-                border: transparent;
-                background-color: transparent;
-            }
         }
     }
 }
@@ -235,15 +467,9 @@ idea to change it to container style queres came from Dante
   @container style(--Arms-Appear:true){ section:has(> div) {
     &> fieldset:first-of-type{
         animation: flickerBorder 1s linear;
-        &>label:has(div){
-            animation:invisible 1s linear, flickerBorder 1s linear 1s; 
-            }
         }
     &> fieldset:nth-of-type(2){
-        animation: invisible 2s linear, flickerBorder 1s linear 2s;
-        &>label:has(div){
-            animation:invisible 3s linear, flickerBorder 1s linear 3s; 
-            }
+        animation: invisible 1s linear, flickerBorder 1s linear 1s;
         }
 }
   }
@@ -367,5 +593,11 @@ html:has([value="--arm"]:checked) {
     --Right-Arm-Top: true;
   }
 
-
-    
+  html:has([value="--Rotate-Snout-5"]:checked) {
+    --Trigger-Nose: true;
+  }
+ 
+  html:has([value="--Trigger-Ears"]:checked) {
+    --Trigger-Ears: true;
+  }
+  
