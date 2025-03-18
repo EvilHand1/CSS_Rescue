@@ -9,6 +9,15 @@
     --primary-color: #C3EEFA;
     --secondary-color: #805D3C;
     --size-bosmarmot:20dvw;
+
+
+    --Arms-Appear:false;
+
+    --Left-Claws-Appear:false;
+    --Right-Claws-Appear: false;
+
+    --Left-Arm-Top: false;
+    --Right-Arm-Top: false;
 }
 body{
     min-block-size: 600dvh;
@@ -87,6 +96,9 @@ section:has(> div){
         rotate: 35deg;
         display:grid;
         
+        /* This comes from Sannes code pen, but I did nest it with the help Niels
+        https://codepen.io/shooft/pen/emYvarP
+         */
         & label:not(:last-child) {
             grid-area:1/1;	
             pointer-events:none;
@@ -95,7 +107,8 @@ section:has(> div){
             height:100%;	
             &:has( :checked ) + label,
             &:first-child:has( ~ label:nth-last-child(2) :checked ){
-                pointer-events:all;
+                /* Niels told me to use a variable so that the priority doesn't need to be changed */
+                pointer-events: var(--arm-pointer-events, all);
             }
         }
                 
@@ -173,65 +186,53 @@ input {
 
 
 
-section:has(input[value="--Left-Arm-1"]:checked) section:has(> div) > :nth-child(3){
-    transform: rotate(10deg);}
+section:has(input[value="--Left-Arm-1"]:checked) section:has(> div) > :nth-child(3){transform: rotate(10deg);}
+section:has(input[value="--Left-Arm-2"]:checked) section:has(> div) > :nth-child(3){transform: rotate(30deg);}
+section:has(input[value="--Left-Arm-3"]:checked) section:has(> div) > :nth-child(3){transform: rotate(50deg);}
+section:has(input[value="--Left-Arm-4"]:checked) section:has(> div) > :nth-child(3){transform: rotate(70deg);}
+section:has(input[value="--Left-Arm-5"]:checked) section:has(> div) > :nth-child(3){transform: rotate(90deg);}
+section:has(input[value="--Right-Arm-1"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-10deg);}
+section:has(input[value="--Right-Arm-2"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-30deg);}
+section:has(input[value="--Right-Arm-3"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-50deg);}
+section:has(input[value="--Right-Arm-4"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-70deg);}
+section:has(input[value="--Right-Arm-5"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-90deg);}
 
-section:has(input[value="--Left-Arm-2"]:checked) section:has(> div) > :nth-child(3){
-    transform: rotate(30deg);}
 
-section:has(input[value="--Left-Arm-3"]:checked) section:has(> div) > :nth-child(3){
-    transform: rotate(50deg);}
+/* arms appear
+idea to change it to container style queres came from Dante
+*/
 
-section:has(input[value="--Left-Arm-4"]:checked) section:has(> div) > :nth-child(3){
-    transform: rotate(70deg);}
-
-section:has(input[value="--Left-Arm-5"]:checked) section:has(> div) > :nth-child(3){
-    transform: rotate(90deg);}
-
-section:has(input[value="--Right-Arm-1"]:checked) section:has(> div) > :nth-child(4){
-    transform: rotate(-10deg);}
-
-section:has(input[value="--Right-Arm-2"]:checked) section:has(> div) > :nth-child(4){
-    transform: rotate(-30deg);}
-
-section:has(input[value="--Right-Arm-3"]:checked) section:has(> div) > :nth-child(4){
-    transform: rotate(-50deg);}
-
-section:has(input[value="--Right-Arm-4"]:checked) section:has(> div) > :nth-child(4){
-    transform: rotate(-70deg);}
-
-section:has(input[value="--Right-Arm-5"]:checked) section:has(> div) > :nth-child(4){
-    transform: rotate(-90deg);}
-
+@container style(--Arms-Appear:false){
+    section:has(> div) {
+        &>fieldset:first-of-type > label,
+        &>fieldset:nth-of-type(2) > label{
+            --arm-pointer-events: none;
+            cursor:default;
+            
+        }
+        &> fieldset:first-of-type{
+            /* border: transparent;
+            background-color: transparent; */
+    
+            &>label:has(div){
+                border: transparent;
+                background-color: transparent;
+            }
+        }
+        &> fieldset:nth-of-type(2){
+            /* border: transparent;
+            background-color: transparent; */
+            pointer-events: none;
+            &>label:has(div){
+                border: transparent;
+                background-color: transparent;
+            }
+        }
+    }
+}
 
 /* arm appears */
-  section:has(input[value="--arm"]:not(:checked)) section:has(> div) {
-    &>fieldset:first-of-type > label,
-    &>fieldset:nth-of-type(2) > label{
-        cursor:default;
-        pointer-events: none;
-    }
-    &> fieldset:first-of-type{
-        border: transparent;
-        background-color: transparent;
-
-        &>label:has(div){
-            border: transparent;
-            background-color: transparent;
-        }
-    }
-    &> fieldset:nth-of-type(2){
-        border: transparent;
-        background-color: transparent;
-        pointer-events: none;
-        &>label:has(div){
-            border: transparent;
-            background-color: transparent;
-        }
-    }
-  }
-
-section:has(input[value="--arm"]:checked) section:has(> div) {
+  @container style(--Arms-Appear:true){ section:has(> div) {
     &> fieldset:first-of-type{
         animation: flickerBorder 1s linear;
         &>label:has(div){
@@ -245,6 +246,7 @@ section:has(input[value="--arm"]:checked) section:has(> div) {
             }
         }
 }
+  }
 
 @keyframes invisible {
     0%, 100%{
@@ -263,98 +265,107 @@ section:has(input[value="--arm"]:checked) section:has(> div) {
     }
   }
 
-
-  section:has(input[value="--LeftClaw"]:not(:checked)) section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{
-    display:none;}
+  
+/* Claws appear */
+@container style(--Left-Claws-Appear:false){section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{display:none;}}
+@container style(--Left-Claws-Appear:true){ section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{animation: claw .5s linear; --start: -55%;}}
+@container style(--Right-Claws-Appear:false){section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{display:none;}}
+@container style(--Right-Claws-Appear:true){section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{animation: claw .5s linear; --start: 55%;}}
    
-   section:has(input[value="--LeftClaw"]:checked) section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{
-    animation: claw .5s linear;}
-   
-section:has(input[value="--RightClaw"]:not(:checked)) section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{
-    display:none;}
-
-section:has(input[value="--RightClaw"]:checked) section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{
-    animation: claw .5s linear;}
-   
+    /* Chat GPT told me I could use a variable for the start when I asked if there was a way not to have the animation double. */
    @keyframes claw {
-   0% {
-       bottom: 35%;
+   from {
+    transform: translateX(var(--start));
    }
-   100%{
-       bottom: -20%;
+   to{
+    transform: translateX(0%)
    }
    }
 
 
 
 
-
-section:has(input[value="--Left-Arm-5"]:not(:checked), input[value="--Right-Arm-5"]:not(:checked)){
-    &> section:has(> div) > :nth-child(2){
+@container style(--Left-Arm-Top:false) or style(--Right-Arm-Top:false){
+    section:has(> div) > :nth-child(2){
         display: none;
-    }
-    &>fieldset:first-of-type > label:not(:last-child),
-    &>fieldset:nth-of-type(2) > label:not(:last-child){
-        cursor:pointer;
     }
 }
 
-section:has(input[value="--Left-Arm-5"]:checked):has(input[value="--Right-Arm-5"]:checked)
+@container style(--Left-Arm-Top:false) or style(--Right-Arm-Top:false){ @container style(--Arms-Appear:true){
+    section:has(>div){
+    &>fieldset:first-of-type > label:not(:last-child),
+    &> fieldset:nth-of-type(2) > label:not(:last-child){
+        cursor:pointer;
+    }}
+}}
+
+
+@container style(--Left-Arm-Top:true) and style(--Right-Arm-Top:true){
 section:has(> div){
    & > :nth-child(2){
     animation: HeadBalloon 2s linear;
     }
-
     & > fieldset:first-of-type{
-        animation: LowerLeftArm 2s linear forwards;
+        animation: LowerArms 2s linear forwards;
+        --start:90deg;
         & > label:not(:last-child){
-            pointer-events: none;
+           --arm-pointer-events: none;
         }
     }
-
     & > fieldset:nth-of-type(2){
-        animation: LowerRightArm 2s linear forwards;
+        animation: LowerArms 2s linear forwards;
+        --start:-90deg;
         & > label:not(:last-child){
-            pointer-events: none;
+            --arm-pointer-events: none;
         }
     }
 }
-
+}
 @keyframes HeadBalloon {
     0%{
         transform-origin: bottom;
         transform:scaleY(0%) translateY(50%);
         z-index: -1;
     }
-
     40%, 60%{
         transform: scaleY(50%) translateY(50%);
         z-index: -1;
     }
-
     90%{
         transform:translateY(-25%);
     }
     100%{
         transform:scaleY(100%) translateY(0%);
     }
-
 }
 
-@keyframes LowerLeftArm {
-    0%{
-        transform: rotate(90deg);
+@keyframes LowerArms {
+    from{
+        transform: rotate(var(--start));
     }
-    100%{
+    to{
         transform: rotate(0deg)
     }
 }
 
-@keyframes LowerRightArm {
-    0%{
-        transform: rotate(-90deg);
-    }
-    100%{
-        transform: rotate(0deg)
-    }
-}
+
+html:has([value="--arm"]:checked) {
+    --Arms-Appear: true;
+  }
+
+  html:has([value="--RightClaw"]:checked) {
+    --Right-Claws-Appear:true;
+  }
+  html:has([value="--LeftClaw"]:checked) {
+    --Left-Claws-Appear:true;
+  }
+
+  html:has([value="--Left-Arm-5"]:checked) {
+    --Left-Arm-Top: true;
+  }
+  html:has([value="--Right-Arm-5"]:checked) {
+    --Right-Arm-Top: true;
+  }
+
+
+    
