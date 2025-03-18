@@ -21,8 +21,6 @@
 
     --Trigger-Nose: false;
     --Trigger-Ears: false;
-    
-    --Nose-Color: black;
 }
 body{
     min-block-size: 600dvh;
@@ -37,8 +35,11 @@ body{
     place-items: center;
 }
 
+input {
+	display:none;
+}
 
-/* DE BOSMARMOT */
+/* ==BOSMARMOT= */
 section:has(section){
     --size-line:calc(  var(--size-bosmarmot) / 100);
     width: var(--size-bosmarmot);
@@ -119,7 +120,6 @@ section:has(> div){
                 height: 40%; 
                 border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
                 background-color: black;
-               
             }
 
             /* teeth left*/
@@ -142,7 +142,7 @@ section:has(> div){
 
         /* left eye */
     & > :nth-child(2), >:nth-child(3){
-        --eye-closed: 0%;
+        --eye-closed: 75%;
         top: 20%;
         left: 25%;
         width: 20%;
@@ -290,45 +290,224 @@ section:has(> div){
 
 }
 
-
-
-input {
-	display:none;
+/* ==BELLYBUTTON== */
+/* idea to change it to container style queres came from Dante */
+/* turns arms off, turns clickable arms off */
+@container style(--Arms-Appear:false){
+    section:has(> div) {
+        &>fieldset:first-of-type > label,
+        &>fieldset:nth-of-type(2) > label{
+            --arm-pointer-events: none;
+            cursor:default;
+        }
+        &> fieldset:first-of-type{
+       display:none;
+        }
+        &> fieldset:nth-of-type(2){
+           display:none;
+            pointer-events: none;
+        }
+    }
 }
 
+/* arm appears */
+  @container style(--Arms-Appear:true){ section:has(> div) {
+    &> fieldset:first-of-type{
+        animation: flickerBorder 1s linear;
+        }
+    &> fieldset:nth-of-type(2){
+        animation: invisible 1s linear, flickerBorder 1s linear 1s;
+        }
+}
+  }
+
+/* ==BELLYANIMATIONS== */
+@keyframes invisible {
+    0%, 100%{
+        border-color: transparent;
+      background-color: transparent;
+    }
+}
+@keyframes flickerBorder {
+    0%, 20%, 40%, 60%, 80%, 100%{
+      border-color: transparent;
+      background-color: transparent;
+    }
+    10%, 30%, 50%, 70%, 90% {
+      border-color: white;
+      background-color: transparent;
+    }
+  }
+
+  
+  /* ==ARMBUTTONS== */
+section:has(input[value="--Left-Arm-1"]:checked) section:has(> div) > :nth-child(3){transform: rotate(10deg);}
+section:has(input[value="--Left-Arm-2"]:checked) section:has(> div) > :nth-child(3){transform: rotate(30deg);}
+section:has(input[value="--Left-Arm-3"]:checked) section:has(> div) > :nth-child(3){transform: rotate(50deg);}
+section:has(input[value="--Left-Arm-4"]:checked) section:has(> div) > :nth-child(3){transform: rotate(70deg);}
+section:has(input[value="--Left-Arm-5"]:checked) section:has(> div) > :nth-child(3){transform: rotate(90deg);}
+section:has(input[value="--Right-Arm-1"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-10deg);}
+section:has(input[value="--Right-Arm-2"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-30deg);}
+section:has(input[value="--Right-Arm-3"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-50deg);}
+section:has(input[value="--Right-Arm-4"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-70deg);}
+section:has(input[value="--Right-Arm-5"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-90deg);}
+
+/* head is off */
+@container style(--Left-Arm-Top:false) or style(--Right-Arm-Top:false){
+    section:has(> div) > :nth-child(2){
+        display: none;
+    }
+}
+
+/* changes cursor of the arms */
+@container style(--Left-Arm-Top:false) or style(--Right-Arm-Top:false){ @container style(--Arms-Appear:true){
+    section:has(>div){
+    &>fieldset:first-of-type > label:not(:last-child),
+    &> fieldset:nth-of-type(2) > label:not(:last-child){
+        cursor:pointer;
+    }}
+}}
+
+/* triggers head and arm animations, turns off clickable arms */
+@container style(--Left-Arm-Top:true) and style(--Right-Arm-Top:true){
+section:has(> div){
+   & > :nth-child(2){
+    animation: HeadBalloon 2s linear;
+    }
+    & > fieldset:first-of-type{
+        animation: LowerArms 2s linear forwards;
+        --start:90deg;
+        & > label:not(:last-child){
+           --arm-pointer-events: none;
+        }
+    }
+    & > fieldset:nth-of-type(2){
+        animation: LowerArms 2s linear forwards;
+        --start:-90deg;
+        & > label:not(:last-child){
+            --arm-pointer-events: none;
+        }
+    }
+}}
+/* ==ARMANIMATIONS== */
+@keyframes HeadBalloon {
+    0%{
+        transform-origin: bottom;
+        transform:scaleY(0%) translateY(50%);
+        z-index: -1;
+    }
+    40%, 60%{
+        transform: scaleY(50%) translateY(50%);
+        z-index: -1;
+    }
+    90%{
+        transform:translateY(-25%);
+    }
+    100%{
+        transform:scaleY(100%) translateY(0%);
+    }
+}
+@keyframes LowerArms {
+    from{
+        transform: rotate(var(--start));
+    }
+    to{
+        transform: rotate(0deg)
+    }
+}
+
+/* ==SNOUTBUTTON== */
+
+section:has(input[value="--Rotate-Snout-1"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(160deg);}
+section:has(input[value="--Rotate-Snout-2"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(120deg);}
+section:has(input[value="--Rotate-Snout-3"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(80deg);}
+section:has(input[value="--Rotate-Snout-4"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(40deg);}
+section:has(input[value="--Rotate-Snout-5"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(0deg);}
+
+/* changes cursor of snout, turns off nose and teeth*/
+@container style(--Trigger-Nose:false){
+    section:has(>div){
+        &>:nth-child(2) > :first-child {
+            &>label{
+                background-color: red;
+                /* cursor:pointer; */
+            }
+        & label:last-of-type {
+   display:none;
+       }
+       & >div{
+        display:none;
+    }}       
+}}
+
+/* activates snout and nose animation */
+@container style(--Trigger-Nose:true){
+   section:has(>div) >:nth-child(2) > :first-child{
+  animation:SnoutCorrect 2s linear forwards .2s;
+   --scale: 3;
+   --rotateY: 180deg;
+        &> label:last-of-type{
+            animation:invisible 1s linear, SnoutCorrect 2s linear 1.2s;
+            --rotateZ: 360deg;
+            --scale: 3;
+            --rotateY: 0deg;
+            cursor:pointer;
+        }
+        & >div{
+            display:none;
+        }
+}}
+/* ==SNOUTANIMATIONS== */
+@keyframes SnoutCorrect {
+0%{
+    transform: scale(1, 1) rotateY(0deg) rotateZ(0deg);
+    z-index: 3;
+}
+50%{
+    transform: scale(var(--scale), var(--scale)) rotateY(var(--rotateY, 0)) rotateZ(var(--rotateZ, 0));
+    z-index: 3;
+}
+100%{
+    transform: scale(1, 1) rotateY(var(--rotateY, 0)) rotateZ(calc(var(--rotateZ, 0deg) * 2));
+    z-index: 3;
+}}
+
+
+  /* ==NOSEBUTTON== */
+  /* Hands hidden, Ears hidden */
 @container style(--Trigger-Ears:false){
     section:has(>div){
         &> fieldset:first-of-type >label:has(div),
         &> fieldset:nth-of-type(2) >label:has(div){
-                border: transparent;
-                background-color: transparent;
+               display: none;
             }
         &>:nth-child(2){
-        & > div:nth-of-type(1), & > div:nth-of-type(2){
-            --eye-closed: 75%;
-        }
         & > div:nth-of-type(3),& > div:nth-of-type(4){
         display:none;
     }}
 }}
-
+  /* Hands appear, Ears appear, Eyes open, nose cursor normal */
 @container style(--Trigger-Ears:true){
     section:has(>div){
         &> fieldset:first-of-type >label:has(div){
-            animation:invisible 3s linear, flickerBorder 1s linear 3s; 
+            animation:invisible 3s linear, flickerBorder 1s linear 3s;
+            cursor: pointer;
         }
         &> fieldset:nth-of-type(2) >label:has(div){
-            animation:invisible 4s linear, flickerBorder 1s linear 4s; 
+            animation:invisible 4s linear, flickerBorder 1s linear 4s;
+            cursor: pointer;
         }
 
+        /* turn off cursor on nose */
     &>:nth-child(2){
         &> :first-child > label:last-of-type{
-            cursor: normal;
+            cursor: default;
         }
 
         &> div:nth-of-type(1), &> div:nth-of-type(2){
             --eye-closed: 75%;
             animation: 
+            /* Sanne heeft me geholpen met de animation iteration samen te voegen met de animation functie. */
                 blink .4s linear 4 2s, 
                 blink 2s linear infinite 3.5s;
         }
@@ -345,6 +524,7 @@ input {
     }}
 }}
 
+/* ==NOSEANIMATIONS= */
 @keyframes blink {
     0% {
         --eye-closed: 75%;
@@ -352,7 +532,6 @@ input {
     25%{
         --eye-closed: 0%;
     }
-
 }
 
 @keyframes TriggerEars {
@@ -373,208 +552,31 @@ input {
     }
 }
 
-section:has(input[value="--Rotate-Snout-1"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(160deg);}
-section:has(input[value="--Rotate-Snout-2"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(120deg);}
-section:has(input[value="--Rotate-Snout-3"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(80deg);}
-section:has(input[value="--Rotate-Snout-4"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(40deg);}
-section:has(input[value="--Rotate-Snout-5"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(0deg);}
-
-@container style(--Trigger-Nose:false){
-    section:has(>div){
-        &>:nth-child(2) > :first-child {
-            &>label{
-                cursor:pointer;
-            }
-        & label:last-of-type {
-   display:none;
-       }
-       & >div{
-        display:none;
-    }}
-       
-}}
-@container style(--Trigger-Nose:true){
-   section:has(>div) >:nth-child(2) > :first-child{
-  animation:SnoutCorrect 2s linear forwards .5s;
-   --scale: 3;
-   --rotateY: 180deg;
-        &> label:last-of-type{
-            animation:invisible 1s linear, SnoutCorrect 2s linear 1.5s;
-            --rotateZ: 360deg;
-            --scale: 3;
-            --rotateY: 0deg;
-            cursor:pointer;
-        }
-        & >div{
-            display:none;
-        }
-}}
-
-
-
-
-@keyframes SnoutCorrect {
-0%{
-    transform: scale(1, 1) rotateY(0deg) rotateZ(0deg);
-    z-index: 3;
-}
-50%{
-    transform: scale(var(--scale), var(--scale)) rotateY(var(--rotateY, 0)) rotateZ(var(--rotateZ, 0));
-    z-index: 3;
-}
-100%{
-    transform: scale(1, 1) rotateY(var(--rotateY, 0)) rotateZ(calc(var(--rotateZ, 0deg) * 2));
-    z-index: 3;
-}
-}
-
-section:has(input[value="--Left-Arm-1"]:checked) section:has(> div) > :nth-child(3){transform: rotate(10deg);}
-section:has(input[value="--Left-Arm-2"]:checked) section:has(> div) > :nth-child(3){transform: rotate(30deg);}
-section:has(input[value="--Left-Arm-3"]:checked) section:has(> div) > :nth-child(3){transform: rotate(50deg);}
-section:has(input[value="--Left-Arm-4"]:checked) section:has(> div) > :nth-child(3){transform: rotate(70deg);}
-section:has(input[value="--Left-Arm-5"]:checked) section:has(> div) > :nth-child(3){transform: rotate(90deg);}
-section:has(input[value="--Right-Arm-1"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-10deg);}
-section:has(input[value="--Right-Arm-2"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-30deg);}
-section:has(input[value="--Right-Arm-3"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-50deg);}
-section:has(input[value="--Right-Arm-4"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-70deg);}
-section:has(input[value="--Right-Arm-5"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-90deg);}
-
-
-/* arms appear
-idea to change it to container style queres came from Dante
-*/
-
-@container style(--Arms-Appear:false){
-    section:has(> div) {
-        &>fieldset:first-of-type > label,
-        &>fieldset:nth-of-type(2) > label{
-            --arm-pointer-events: none;
-            cursor:default;
-        }
-        &> fieldset:first-of-type{
-            border: transparent;
-            background-color: transparent;
-        }
-        &> fieldset:nth-of-type(2){
-            border: transparent;
-            background-color: transparent;
-            pointer-events: none;
-        }
-    }
-}
-
-/* arm appears */
-  @container style(--Arms-Appear:true){ section:has(> div) {
-    &> fieldset:first-of-type{
-        animation: flickerBorder 1s linear;
-        }
-    &> fieldset:nth-of-type(2){
-        animation: invisible 1s linear, flickerBorder 1s linear 1s;
-        }
-}
-  }
-
-@keyframes invisible {
-    0%, 100%{
-        border-color: transparent;
-      background-color: transparent;
-    }
-}
-@keyframes flickerBorder {
-    0%, 20%, 40%, 60%, 80%, 100%{
-      border-color: transparent;
-      background-color: transparent;
-    }
-    10%, 30%, 50%, 70%, 90% {
-      border-color: white;
-      background-color: transparent;
-    }
-  }
-
-  
-/* Claws appear */
+/* ==CLAWBUTTONS== */
 @container style(--Left-Claws-Appear:false){section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{display:none;}}
-@container style(--Left-Claws-Appear:true){ section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{animation: claw .5s linear; --start: -55%;}}
+@container style(--Left-Claws-Appear:true){ section:has(> div) > fieldset:first-of-type > label:has(div) {
+    cursor: default;
+    &> :first-child{
+        animation: claw .5s linear; --start: -55%;}}}
 @container style(--Right-Claws-Appear:false){section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{display:none;}}
-@container style(--Right-Claws-Appear:true){section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{animation: claw .5s linear; --start: 55%;}}
+@container style(--Right-Claws-Appear:true){section:has(> div) > fieldset:nth-of-type(2) > label:has(div){ 
+    cursor: default;
+    &> :first-child{
+        animation: claw .5s linear; --start: 55%;}}}
    
-    /* Chat GPT told me I could use a variable for the start when I asked if there was a way not to have the animation double. */
-   @keyframes claw {
-   from {
-    transform: translateX(var(--start));
-   }
-   to{
-    transform: translateX(0%)
-   }
-   }
-
-
-
-
-@container style(--Left-Arm-Top:false) or style(--Right-Arm-Top:false){
-    section:has(> div) > :nth-child(2){
-        display: none;
-    }
+/* ==CLAWANIMATION== */
+/* Chat GPT told me I could use a variable for the start when I asked if there was a way not to have the animation double. */
+@keyframes claw {
+from {
+transform: translateX(var(--start));
 }
-
-@container style(--Left-Arm-Top:false) or style(--Right-Arm-Top:false){ @container style(--Arms-Appear:true){
-    section:has(>div){
-    &>fieldset:first-of-type > label:not(:last-child),
-    &> fieldset:nth-of-type(2) > label:not(:last-child){
-        cursor:pointer;
-    }}
-}}
-
-
-@container style(--Left-Arm-Top:true) and style(--Right-Arm-Top:true){
-section:has(> div){
-   & > :nth-child(2){
-    animation: HeadBalloon 2s linear;
-    }
-    & > fieldset:first-of-type{
-        animation: LowerArms 2s linear forwards;
-        --start:90deg;
-        & > label:not(:last-child){
-           --arm-pointer-events: none;
-        }
-    }
-    & > fieldset:nth-of-type(2){
-        animation: LowerArms 2s linear forwards;
-        --start:-90deg;
-        & > label:not(:last-child){
-            --arm-pointer-events: none;
-        }
-    }
+to{
+transform: translateX(0%)
 }
 }
-@keyframes HeadBalloon {
-    0%{
-        transform-origin: bottom;
-        transform:scaleY(0%) translateY(50%);
-        z-index: -1;
-    }
-    40%, 60%{
-        transform: scaleY(50%) translateY(50%);
-        z-index: -1;
-    }
-    90%{
-        transform:translateY(-25%);
-    }
-    100%{
-        transform:scaleY(100%) translateY(0%);
-    }
-}
-
-@keyframes LowerArms {
-    from{
-        transform: rotate(var(--start));
-    }
-    to{
-        transform: rotate(0deg)
-    }
-}
 
 
+/* ==OTHER== */
 html:has([value="--arm"]:checked) {
     --Arms-Appear: true;
   }
