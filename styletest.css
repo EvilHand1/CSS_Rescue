@@ -320,10 +320,10 @@ section:has(> div){
 /* arm appears */
   @container style(--Arms-Appear:true){ section:has(> div) {
     &> fieldset:first-of-type{
-        /* animation: flickerBorder 1s linear; */
+        animation: flickerBorder 1s linear;
         }
     &> fieldset:nth-of-type(2){
-        /* animation: invisible 1s linear, flickerBorder 1s linear 1s; */
+        animation: invisible 1s linear, flickerBorder 1s linear 1s;
         }
 }
   }
@@ -379,7 +379,7 @@ section:has(input[value="--Right-Arm-5"]:checked) section:has(> div) > :nth-chil
 @container style(--Left-Arm-Top:true) and style(--Right-Arm-Top:true){
 section:has(> div){
    & > :nth-child(2){
-    /* animation: HeadBalloon 2s linear; */
+    animation: HeadBalloon 2s linear;
     }
     & > fieldset:first-of-type{
         animation: LowerArms 2s linear forwards;
@@ -449,11 +449,11 @@ section:has(input[value="--Rotate-Snout-5"]:checked) section:has(> div) > :nth-c
 /* activates snout and nose animation */
 @container style(--Trigger-Nose:true){
    section:has(>div) >:nth-child(2) > :first-child{
-  /* animation:SnoutCorrect 2s linear forwards .2s; */
+  animation:SnoutCorrect 2s linear forwards .2s;
    --scale: 3;
    --rotateY: 180deg;
         &> label:last-of-type{
-            /* animation:invisible 1s linear, SnoutCorrect 2s linear 1.2s; */
+            animation:invisible 1s linear, SnoutCorrect 2s linear 1.2s;
             --rotateZ: 360deg;
             --scale: 3;
             --rotateY: 0deg;
@@ -496,11 +496,11 @@ section:has(input[value="--Rotate-Snout-5"]:checked) section:has(> div) > :nth-c
 @container style(--Trigger-Ears:true){
     section:has(>div){
         &> fieldset:first-of-type >label:has(div){
-            /* animation:invisible 3s linear, flickerBorder 1s linear 3s; */
+            animation:invisible 3s linear, flickerBorder 1s linear 3s;
             cursor: pointer;
         }
         &> fieldset:nth-of-type(2) >label:has(div){
-            /* animation:invisible 4s linear, flickerBorder 1s linear 4s; */
+            animation:invisible 4s linear, flickerBorder 1s linear 4s;
             cursor: pointer;
         }
 
@@ -563,13 +563,13 @@ section:has(input[value="--Rotate-Snout-5"]:checked) section:has(> div) > :nth-c
 @container style(--Left-Claws-Appear:true){ section:has(> div) > fieldset:first-of-type > label:has(div) {
     cursor: default;
     &> :first-child{
-        animation: claw .5s linear; --start: -55%;
+        animation: claw .4s linear; --start: -55%;
     }}}
 @container style(--Right-Claws-Appear:false){section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{display:none;}}
 @container style(--Right-Claws-Appear:true){section:has(> div) > fieldset:nth-of-type(2) > label:has(div){ 
     cursor: default;
     &> :first-child{
-         animation: claw .5s linear; --start: 55%;
+         animation: claw .4s linear; --start: 55%;
         }}} 
    
 /* ==CLAWANIMATION== */
@@ -589,10 +589,10 @@ transform: translateX(0%)
         transform-origin: center;
         animation: jump-body 2s linear forwards .5s, digging-body 10s linear forwards 2.6s;
         &> fieldset:first-of-type{
-            animation: jump-arms 1.1s linear forwards 2s, digging-arms .75s linear forwards 2.25s 10;
+            animation: jump-arms 1.6s linear forwards, digging-arms .75s linear forwards 2.25s 10;
         }
         &> fieldset:nth-of-type(2){
-            animation: jump-arms 1.1s linear forwards , digging-arms .75s linear forwards 2.5s 10;
+            animation: jump-arms 1.6s linear forwards, digging-arms .75s linear forwards 2.5s 10;
             --jumpStart: -160deg;
             --dig-1: -160deg;
             --dig-2: -90deg;
@@ -647,7 +647,10 @@ transform: translateX(0%)
 
 @keyframes jump-arms{
     0%{
-        transform:rotate(0deg);
+        transform:rotate(0deg) rotate(0deg);
+    }
+    30%{
+        transform:rotate(0deg) rotate(0deg);
     }
     100%{
         transform:rotate(var(--jumpStart,160deg))
@@ -680,14 +683,14 @@ html:has([value="--arm"]:checked) {
     --Left-Claws-Appear:true;
   }
 
-  html:has([value="--Left-Arm-2"]:checked) {
+  html:has([value="--Left-Arm-5"]:checked) {
     --Left-Arm-Top: true;
   }
-  html:has([value="--Right-Arm-2"]:checked) {
+  html:has([value="--Right-Arm-5"]:checked) {
     --Right-Arm-Top: true;
   }
 
-  html:has([value="--Rotate-Snout-2"]:checked) {
+  html:has([value="--Rotate-Snout-5"]:checked) {
     --Trigger-Nose: true;
   }
  
@@ -695,3 +698,15 @@ html:has([value="--arm"]:checked) {
     --Trigger-Ears: true;
   }
   
+  
+  @container style(--Right-Claws-Appear:false) and style(--Left-Claws-Appear:false){
+    h1{
+        display: none;
+    }
+}
+
+  @container style(--Right-Claws-Appear:true) and style(--Left-Claws-Appear:true){
+    h1{
+        display: block;
+    }
+}
