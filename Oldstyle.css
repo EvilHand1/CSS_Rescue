@@ -1,0 +1,328 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+:root{
+    --primary-color: #C3EEFA;
+    --secondary-color: #805D3C;
+    --size-bosmarmot:20dvw;
+}
+body{
+    min-block-size: 600dvh;
+    background: linear-gradient(
+        to bottom,
+        var(--primary-color) 0 calc(var(--size-bosmarmot) * 0.6),
+        var(--secondary-color) 0 100%
+    );
+    margin:0;
+    /* height: 100dvh; */
+    display:grid;
+    place-items: center;
+
+    /* animation: shake linear forwards;
+        animation-timeline: scroll();
+        animation-range-start: 100px; */
+}
+
+/* DE BOSMARMOT */
+
+
+section:has(section){
+    --size-line:calc(  var(--size-bosmarmot) / 100);
+    width: var(--size-bosmarmot);
+    aspect-ratio: 35/40;
+    position: fixed;
+    top: calc(var(--size-bosmarmot) * 0.5);
+    animation: draaien linear;
+    animation-timeline: scroll();
+    animation-range-start: 10px;
+    animation-iteration-count: 5;
+    
+    & :nth-child(1n){
+        position:absolute;
+        border: var(--size-line) solid var(--border-color);
+        background-color: var(--primary-color-groundhog);
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    }
+}
+
+section:has(> div){
+    /* color pallete: https://www.color-hex.com/color-palette/1032945 */
+    --primary-color-groundhog:#613522;
+    --secondary-color-groundhog:#815d4e;
+    --third-color-groundhog:#a0867a;
+    --claw-color-groundhog:#dfd7d3;
+    --border-color: black;
+    --white:white;
+
+    width:100%;
+    height:100%;
+    display:grid;
+    justify-items: center;
+    /* fur */
+    & > div:first-child{
+        top: 10%;
+        width: 75%;
+        height: 85%;
+        background-color: var(--secondary-color-groundhog);
+    }
+    /* head */
+    & > :nth-child(2){
+        bottom: 90%;
+        width: 55%;
+        height: 40%;
+
+        /* snout */
+        & :first-child{
+            bottom: 20%;
+            left: 25%;
+            width: 55%;
+            height: 40%; 
+            border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
+            background-color: var(--secondary-color-groundhog);
+
+            /* nose */
+            & :first-child{
+                top: 30%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 35%;
+                height: 40%; 
+                border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
+                background-color: black;
+            }
+
+            /* teeth left*/
+            & :nth-child(1n + 2){
+                top: 80%;
+                left: 43%;
+                transform: translate(-50%, -50%);
+                width: 15%;
+                height: 30%; 
+                border-radius: 6% 0% 10% 10% / 0% 0% 100% 100%;
+                background-color: #dfd7d3;
+                border-top: none;     
+            }
+
+            /* teeth right */
+            & :nth-child(3){
+                top: 80%;
+                left: 56%;    
+            }
+        }
+
+        /* left eye */
+    & > :nth-child(2), >:nth-child(3){
+        top: 20%;
+        left: 30%;
+        width: 15%;
+        height: 15%;  
+        border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+        background-image: 
+        radial-gradient(
+        circle at bottom right, 
+           black 1vw,
+         white 0
+             );
+    }
+
+    /* right eye */
+    & > :nth-child(3){
+        top: 20%;
+        left: 60%;
+        background-image: 
+        radial-gradient(
+        circle at left, 
+           black .7vw,
+         white 0
+             );
+    }
+
+    /* left ear */
+    & :nth-child(1n + 4){
+        top: -5%;
+        left: 15%;
+        width: 15%;
+        height: 20%;
+        border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+        z-index: -1;
+        background-image: 
+        radial-gradient(
+        circle, 
+           var(--third-color-groundhog) .6vw,
+         var(--primary-color-groundhog) 0
+             )
+    }
+
+    /* right ear */
+    & :nth-child(5){
+        top: -5%;
+        left: 70%;
+    }
+    }
+    /* left arm */
+    & > :nth-child(3), & > :nth-child(4){
+        transform-origin: top;
+        top: 15%;
+        left: 10%;
+        width: 20%;
+        height: 60%; 
+        rotate: 35deg;
+
+        animation: zwaaien1 linear forwards;
+        animation-timeline: scroll();
+        animation-iteration-count: 5;
+        animation-range-start: 10px;
+        /* The claw on the left hand */
+        & > :first-child > :first-child{
+            /* middle claw */
+            rotate: 95deg;
+            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+
+            /* right claw */
+            &::after, &::before{
+                content:"";
+                position:absolute;
+                bottom: 150%;
+                width: 110%;
+                height: 120%;
+                background-color: var(--claw-color-groundhog);
+                border: var(--size-line) solid var(--border-color);
+                border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+            }
+            /* left claw */
+            &::before{
+                bottom: -150%; 
+            }
+        }
+    }
+    /* right arm */
+    & > :nth-child(4){
+        left: 70%;
+        rotate: -35deg;
+        animation: zwaaien2 linear forwards;
+        animation-timeline: scroll();
+        animation-iteration-count: 5;
+        animation-range-start: 10px;
+
+         /* The claw on the right hand */
+        & :first-child > :first-child{
+            /* middle claw */
+            rotate: -95deg;
+            border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;
+                /* right claw */
+                &::after, &::before{
+                    content:"";
+                    position:absolute;
+                    bottom: 150%;
+                    width: 110%;
+                    height: 120%;
+                    background-color: var(--claw-color-groundhog);
+                    border: var(--size-line) solid var(--border-color);
+                    border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;
+                }
+                /* left claw */
+                &::before{
+                    bottom: -180%;
+                }
+        }
+    }
+    /* Left and right hands */
+    > :nth-of-type(3) > :first-child, 
+    >:nth-of-type(4) > :first-child{  
+        bottom: -10%;
+        width: 125%;
+        height: 30%; 
+        left: -15%;
+        border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
+    }    
+    /* the middle claws on the right and left hand */
+    > :nth-of-type(3) > :first-child > :first-child, 
+    >:nth-of-type(4) > :first-child > :first-child{  
+        bottom: -20%;
+        left: 10%;
+        width: 70%;
+        height: 30%; 
+        background-color: var(--claw-color-groundhog);
+        z-index: -1;
+    }
+}
+
+
+
+
+
+
+@keyframes draaien{
+    0%{
+rotate: 180deg;
+    }
+    25%{
+        rotate:185deg;
+    }
+    75%{
+        rotate:175deg;
+    }
+    100%{
+        rotate: 180deg;
+    }
+}
+
+
+@keyframes zwaaien1{
+    0%{
+        rotate: 185deg;
+        top: 15%;
+    }
+    33%{
+        top: 20%;
+        rotate: 140deg;
+    }
+    66%{
+        top: 25%;
+        rotate: 185deg;
+    }
+    100%{
+        rotate: 185deg;
+        top: 15%;
+    }
+}
+
+@keyframes zwaaien2{
+    0%{
+        rotate: 180deg;
+        top: 15%;
+    }
+
+    33%{
+        top: 20%;
+        rotate: 230deg;
+    }
+
+    66%{
+        top: 25%;
+        rotate: 180deg;
+    }
+    100%{
+        rotate: 180deg;
+        top: 15%;
+    }
+}
+
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }

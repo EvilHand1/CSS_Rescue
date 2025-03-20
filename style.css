@@ -1,3 +1,20 @@
+/* 
+index
+==BOSMARMOT==
+==BELLYBUTTON==
+==ARMBUTTONS==
+==ARMANIMATIONS== 
+==SNOUTBUTTON==
+==SNOUTANIMATIONS== 
+==NOSEBUTTON==
+==NOSEANIMATIONS==
+==CLAWBUTTONS==
+==CLAWANIMATION==
+==DIGGING==
+==CONTAINER==
+==TEXT==
+*/
+
 *,
 *::before,
 *::after{
@@ -6,37 +23,58 @@
     padding:0;
 }
 :root{
-    --primary-color: #C3EEFA;
-    --secondary-color: #805D3C;
+    --primary-color: #013cab;
+    --secondary-color: #1d5335;
+    --tertery-color: #542d1c;
     --size-bosmarmot:20dvw;
+
+    --Arms-Appear:false;
+
+    --Left-Claws-Appear:false;
+    --Right-Claws-Appear: false;
+
+    --Left-Arm-Top: false;
+    --Right-Arm-Top: false;
+
+    --Trigger-Nose: false;
+    --Trigger-Ears: false;
 }
+
 body{
-    min-block-size: 600dvh;
-    background: linear-gradient(
-        to bottom,
-        var(--primary-color) 0 calc(var(--size-bosmarmot) * 0.8),
-        var(--secondary-color) 0 100%
-    );
+    /* https://codepen.io/billyysea/pen/nLroLY */
+    background: linear-gradient(to bottom, #2d91c2 0%,#1e528e 100%); 
     margin:0;
-    /* height: 100dvh; */
+    height: 100dvh;
     display:grid;
     place-items: center;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/font */
+    font: italic small-caps bold 16px/2 cursive;
+    position: relative;
+
+    overflow:hidden;
+    &::before{
+        content: '';
+        position: absolute;
+        height: 40vh;
+        width: 100%;
+        bottom: 0;
+        /* Elton */
+        background: linear-gradient(to bottom, #057a26 5%, #d4ff00 12.5%, #9F6942 20%);
+    }
+    
 }
 
-/* DE BOSMARMOT */
+input {
+	display:none;
+}
 
-
+/* ==BOSMARMOT== */
 section:has(section){
     --size-line:calc(  var(--size-bosmarmot) / 100);
     width: var(--size-bosmarmot);
     aspect-ratio: 35/40;
-    position: fixed;
-    top: calc(var(--size-bosmarmot) * 0.6);
-    animation: draaien linear;
-    animation-timeline: scroll();
-    animation-range-start: 30px;
-    animation-iteration-count: 5;
-    
+    position: absolute;
+    top: calc(40dvh + var(--size-bosmarmot) * 0.1);
     container-type: inline-size;
 
     & :nth-child(1n){
@@ -55,7 +93,8 @@ section:has(> div){
     --claw-color-groundhog:#dfd7d3;
     --border-color: black;
     --white:white;
-
+    /* https://getcssscan.com/css-box-shadow-examples */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     width:100%;
     height:100%;
     display:grid;
@@ -66,11 +105,6 @@ section:has(> div){
         width: 75%;
         height: 85%;
         background-color: var(--secondary-color-groundhog);
-     
-                & input[type="radio"] {
-                    display: none;
-                }
-
                &:has(input[value="--arm"]:not(:checked)){
                     cursor:pointer;
                 }
@@ -80,37 +114,45 @@ section:has(> div){
         bottom: 90%;
         width: 55%;
         height: 40%;
-        transition: all 1s;     
+        
         /* snout */
-        & :first-child{
+        & > :first-child{
             bottom: 20%;
             left: 25%;
             width: 55%;
             height: 40%; 
             border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
             background-color: var(--secondary-color-groundhog);
+            transition: all .20s;
+            
+
+            & label:not(:last-of-type) {
+                grid-area:1/1;	
+                pointer-events:none;
+                opacity:0;	
+                width:100%;
+                height:100%;	
+                &:has( :checked ) + label{
+                    pointer-events: all;
+                }
+            }
 
             /* nose */
-            & :first-child{
-                top: 30%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+            & > label:last-of-type{
+                top: 15%;
+                left: 35%;
+                transform-origin: center;
                 width: 35%;
                 height: 40%; 
                 border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
                 background-color: black;
-                cursor:pointer;
-
-                & > input[type="checkbox"] {
-                    display: none;
-                }
             }
 
             /* teeth left*/
-            & :nth-child(1n + 2){
-                top: 80%;
-                left: 43%;
-                transform: translate(-50%, -50%);
+             & >div:nth-last-of-type(2), &>:last-child{
+                top: 65%;
+                left: 37%;
+                transform-origin: top;
                 width: 15%;
                 height: 30%; 
                 border-radius: 6% 0% 10% 10% / 0% 0% 100% 100%;
@@ -119,19 +161,18 @@ section:has(> div){
             }
 
             /* teeth right */
-            & :nth-child(3){
-                top: 80%;
-                left: 56%;    
+            & >:last-child{
+                left: 51%;    
             }
         }
 
         /* left eye */
     & > :nth-child(2), >:nth-child(3){
-        --eye-closed: 0%;
+        --eye-closed: 75%;
         top: 20%;
-        left: 30%;
-        width: 15%;
-        height: 15%;  
+        left: 25%;
+        width: 20%;
+        height: 20%;  
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
 
         background-image:
@@ -141,9 +182,6 @@ section:has(> div){
            black 50%,
            white 0
              );
-             
-             animation: blink 2s infinite;
-             transition: all 1s;  
             }
 
     /* right eye */
@@ -165,73 +203,58 @@ section:has(> div){
 
     /* left ear */
     & > :nth-child(4), & > :nth-child(5){
-        top: -5%;
+        top: -10%;
         left: 15%;
-        width: 15%;
-        height: 20%;
+        width: 20%;
+        height: 25%;
         border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
-        z-index: -1;
+        z-index: -1 ;
         background-image: 
         radial-gradient(
         circle, 
            var(--third-color-groundhog) .6vw,
          var(--primary-color-groundhog) 0
              );
-transition: transform 0.3s ease-in-out; 
-             animation: earWiggle 2s infinite ease-in-out;    
-             transition: all 1s;     
     }
    
     /* right ear */
-    & :nth-child(5){
-        top: -5%;
-        left: 70%;
-        animation: earWiggle 1s infinite ease-in-out;
+    & > :nth-child(5){
+        top: -10%;
+        left: 65%;
     }
-
-&:hover > :nth-child(3),
-&:hover > :nth-child(2){
-    background-image:
-        radial-gradient(circle at top, var(--primary-color-groundhog) var(--eye-closed), var(--secondary-color-groundhog) 0 calc(var(--eye-closed) * 1.2), transparent 0),
-        radial-gradient(
-        circle at center, 
-           black 30%,
-           white 0
-             );
-}
-
-    &:hover > :nth-child(4),
-    &:hover > :nth-child(5){
-        border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
-        rotate: -50deg;
-     }
-     &:hover{
-        width: 35%;
-        height: 20%;
-     }
-
     }
     /* left arm */
-    & > :nth-child(3), & > :nth-child(4){
+    & > fieldset:first-of-type,
+    & > fieldset:nth-of-type(2){
         transform-origin: top;
         top: 15%;
         left: 10%;
         width: 20%;
         height: 60%; 
         rotate: 35deg;
-
-        &>button{
-        transform-origin: top;
-        height: 100%;
-        width: 100%;
-        background-color: red;
+        display:grid;
+        transition: all .20s;
+        /* This comes from Sannes code pen, but I did nest it with the help Niels
+        https://codepen.io/shooft/pen/emYvarP
+         */
+        & label:not(:last-child) {
+            grid-area:1/1;	
+            pointer-events:none;
+            opacity:0;	
+            width:100%;
+            height:100%;	
+            &:has( :checked ) + label,
+            &:first-child:has( ~ label:nth-last-child(2) :checked ){
+                /* Niels told me to use a variable so that the priority doesn't need to be changed */
+                pointer-events: var(--arm-pointer-events, all);
+            }
         }
-        
+                
         /* The claw on the left hand */
-        & > :first-child > :first-child{
+        & >label:has(div) > :first-child{
             /* middle claw */
             rotate: 95deg;
-            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;
+            border-radius: 100% 0% 80% 30% / 80% 30% 100% 30%;            
 
             /* right claw */
             &::after, &::before{
@@ -250,40 +273,30 @@ transition: transform 0.3s ease-in-out;
             }
         }
     }
-    /* right arm */
-    & > :nth-child(4){
+
+    /* Right arm */
+    & > fieldset:nth-of-type(2){
         left: 70%;
         rotate: -35deg;
-        animation: zwaaien2 linear;
-        animation-timeline: scroll();
-        animation-iteration-count: 5;
-        animation-range-start: 30px;
-
-         /* The claw on the right hand */
-        & :first-child > :first-child{
+        /* The claw on the right hand */
+        & >label:has(div) > :first-child{
             /* middle claw */
             rotate: -95deg;
-            border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;
-                /* right claw */
-                &::after, &::before{
-                    content:"";
-                    position:absolute;
-                    bottom: 150%;
-                    width: 110%;
-                    height: 120%;
-                    background-color: var(--claw-color-groundhog);
-                    border: var(--size-line) solid var(--border-color);
-                    border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;
-                }
-                /* left claw */
-                &::before{
-                    bottom: -180%;
-                }
-        }
+            border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;            
+            /* right claw */
+            &::after, &::before{
+                border-radius: 0% 100% 30% 80% / 30% 80% 30% 100%;
+            }
+            /* left claw */
+            &::before{
+                bottom: -180%;
+            }
     }
+}
+
     /* Left and right hands */
-    > :nth-of-type(2) > :nth-child(1), 
-    >:nth-of-type(4) > :first-child{  
+    & > fieldset:first-of-type > label:has(div),
+    & > fieldset:nth-of-type(2) > label:has(div){ 
         bottom: -10%;
         width: 125%;
         height: 30%; 
@@ -291,8 +304,8 @@ transition: transform 0.3s ease-in-out;
         border-radius: 85% 85% 55% 55% / 75% 75% 95% 95%;
     }    
     /* the middle claws on the right and left hand */
-    > :nth-of-type(2) > :first-child > :first-child, 
-    >:nth-of-type(3) > :first-child > :first-child{  
+   & >fieldset:first-of-type > label:has(div) > :first-child,
+   &> fieldset:nth-of-type(2) > label:has(div) > :first-child{  
         bottom: -20%;
         left: 10%;
         width: 70%;
@@ -300,190 +313,48 @@ transition: transform 0.3s ease-in-out;
         background-color: var(--claw-color-groundhog);
         z-index: -1;
     }
-}
-
-
-
-
-
-
-@keyframes draaien{
-    0%, 100%{
-rotate: 180deg;
-    } 
-}
-
-
-@keyframes zwaaien1 {
-    0% {
-        transform: rotate(150deg) translateY(0%);
-    }
-    33% {
-        transform: rotate(90deg) translateY(-5%);
-    }
-    66% {
-        transform: rotate(150deg) translateY(-10%);
-    }
-    100% {
-        transform: rotate(150deg) translateY(0%);
-    }
-}
-
-@keyframes zwaaien2{
-    0%, 100%{   
-        transform: rotate(210deg) translateY(0%);
-    }
-    33%{
-        transform: rotate(270deg) translateY(-5%);
-    }
-    66%{
-        transform: rotate(210deg) translateY(-10%);
-    }
-}
-
-
-@keyframes blink {
-    0% {
-        --eye-closed: 75%;
-    }
-    30%{
-        --eye-closed: 0%;
-    }
 
 }
 
-@keyframes earWiggle{
-    0%, 100%{
-        transform: rotateX(0deg);
-    }
-    50%{
-        transform: rotateX(20deg);
+/* ==BELLYBUTTON== */
+/* idea to change it to container style queres came from Dante */
+/* turns arms off, turns clickable arms off */
+@container style(--Arms-Appear:false){
+    section:has(> div) {
+        &>fieldset:first-of-type > label,
+        &>fieldset:nth-of-type(2) > label{
+            --arm-pointer-events: none;
+            cursor:default;
+        }
+        &> fieldset:first-of-type{
+       display:none;
+        }
+        &> fieldset:nth-of-type(2){
+           display:none;
+            pointer-events: none;
+        }
     }
 }
 
-/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries */
-@container (max-width: 100px) {
-    section:has(> div) > div:first-child {
-        width: 65%;
-    }
-   
+/* arm appears */
+  @container style(--Arms-Appear:true){ section:has(> div) {
+    &> fieldset:first-of-type{
+        animation: --flicker-border 1s linear;
+        }
+    &> fieldset:nth-of-type(2){
+        animation: --invisible 1s linear, --flicker-border 1s linear 1s;
+        }
+}
   }
 
-  @container (max-width: 130px) {
-    section:has(> div) > div:nth-child(3) > div:first-child > div:first-child{
-        left: 30%;
-        bottom: -30%;
-        &::after{
-            content:none;
-        }
-        &::before{
-            bottom: -200%;
-        }
-    }
-    section:has(> div) > div:nth-child(4) > div:first-child > div:first-child{
-        left: 0%;
-        bottom: -30%;
-        &::after{
-            content:none;
-        }
-        &::before{
-            bottom: -200%;
-        }
-    }
-  }
-
-
-  /* section:has(input[value="--arm"]:not(:checked)) section:has(> div) > :nth-child(3){
-    border: transparent;
-    background-color: transparent;
-    &> :first-child{
-        border: transparent;
-        background-color: transparent;
-        &> :first-child{
-            border: transparent;
-            background-color: transparent;
-            &::after, &::before{
-                border: transparent;
-                background-color: transparent;
-            }
-        }
-    }
-} */
-
-section:has(input[value="--Low"]:checked) section:has(> div) > :nth-child(3){
-    transform: rotate(25deg);
-    & input[value="--Top"], & input[value="--Low"]{
-       pointer-events: none;
-       z-index: -1;
-    }
-}
-section:has(input[value="--Middle"]:checked) section:has(> div) > :nth-child(3){
-    transform: rotate(50deg);
-    & input[value="--Middle"], & input[value="--Low"] {
-        pointer-events: none;
-        z-index: -1;
-    }
-}
-section:has(input[value="--Top"]:checked) section:has(> div) > :nth-child(3){
-    transform: rotate(75deg);
-    & input[value="--Top"], & input[value="--Low"] {
-        pointer-events: none;
-        z-index: -1;
-    }
-}
-
-section:has(input[value="--Top"]:not(:checked)) section:has(> div) > :nth-child(2){
-    display:none;
-}
-section:has(input[value="--Top"]:checked) section:has(> div) > :nth-child(2){
-    animation: flickerBorder 1s linear;
-}
-
-
-
-
-/* section:has(input[value="--arm"]:checked) section:has(> div) > :nth-child(3){
-    animation: flickerBorder 1s linear, zwaaien1 linear;
-    animation-timeline: auto, scroll();
-    animation-range-start: 0, 30px;
-    animation-iteration-count: 1, 5;
-    &> :first-child{
-        animation:invisible 1s linear, flickerBorder 1s linear 1s; 
-    
-        &> :first-child{
-            animation: invisible 2s linear, flickerBorder 1s linear 2s;
-            &::after, &::before{
-                animation: invisible 2s linear, flickerBorder 1s linear 2s; 
-            }
-        }
-    }
-} */
-
-section:has(input[value="--RightClaw"]:not(:checked)) section:has(> div) > :nth-child(4) > :first-child > :first-child{
- display:none;
-}
-
-section:has(input[value="--RightClaw"]:checked) section:has(> div) > :nth-child(4) > :first-child > :first-child{
- animation: claw .5s linear;
-   }
-
-
-@keyframes claw {
-0% {
-    bottom: 35%;
-}
-100%{
-    bottom: -20%;
-}
-}
-
-@keyframes invisible {
+/* ==BELLYANIMATIONS== */
+@keyframes --invisible {
     0%, 100%{
         border-color: transparent;
       background-color: transparent;
     }
 }
-@keyframes flickerBorder {
+@keyframes --flicker-border {
     0%, 20%, 40%, 60%, 80%, 100%{
       border-color: transparent;
       background-color: transparent;
@@ -494,24 +365,450 @@ section:has(input[value="--RightClaw"]:checked) section:has(> div) > :nth-child(
     }
   }
 
-  /* https://codepen.io/shooft/pen/jORqgdg?editors=1100 */
-:root:has([value="raccoon"]:checked) {
-	--colors:raccoon;
+  
+  /* ==ARMBUTTONS== */
+section:has(input[value="--Left-Arm-1"]:checked) section:has(> div) > :nth-child(3){transform: rotate(10deg);}
+section:has(input[value="--Left-Arm-2"]:checked) section:has(> div) > :nth-child(3){transform: rotate(30deg);}
+section:has(input[value="--Left-Arm-3"]:checked) section:has(> div) > :nth-child(3){transform: rotate(50deg);}
+section:has(input[value="--Left-Arm-4"]:checked) section:has(> div) > :nth-child(3){transform: rotate(70deg);}
+section:has(input[value="--Left-Arm-5"]:checked) section:has(> div) > :nth-child(3){transform: rotate(90deg);}
+section:has(input[value="--Right-Arm-1"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-10deg);}
+section:has(input[value="--Right-Arm-2"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-30deg);}
+section:has(input[value="--Right-Arm-3"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-50deg);}
+section:has(input[value="--Right-Arm-4"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-70deg);}
+section:has(input[value="--Right-Arm-5"]:checked) section:has(> div) > :nth-child(4){transform: rotate(-90deg);}
+
+/* head is off */
+@container style(--Left-Arm-Top:false) or style(--Right-Arm-Top:false){
+    section:has(> div) > :nth-child(2){
+        display: none;
+    }
 }
 
-@container style(--colors:raccoon) {
-	section:has(> div) {
-		--primary-color-groundhog:#646464;
-    --secondary-color-groundhog:#303030;
-    --third-color-groundhog:#444444;
-    --claw-color-groundhog:#330000;
-    --border-color: black;
-    --white:rgb(0, 0, 0);
-	}
+/* changes cursor of the arms */
+@container style(--Left-Arm-Top:false) or style(--Right-Arm-Top:false){ @container style(--Arms-Appear:true){
+    section:has(>div){
+    &>fieldset:first-of-type > label:not(:last-child),
+    &> fieldset:nth-of-type(2) > label:not(:last-child){
+        cursor:pointer;
+    }}
+}}
+
+/* triggers head and arm animations, turns off clickable arms */
+@container style(--Left-Arm-Top:true) and style(--Right-Arm-Top:true){
+section:has(> div){
+   & > :nth-child(2){
+    animation: --head-appears 2s linear;
+    }
+    & > fieldset:first-of-type{
+        animation: --lower-arms 2s linear forwards;
+        --start:90deg;
+        & > label:not(:last-child){
+           --arm-pointer-events: none;
+        }
+    }
+    & > fieldset:nth-of-type(2){
+        animation: --lower-arms 2s linear forwards;
+        --start:-90deg;
+        & > label:not(:last-child){
+            --arm-pointer-events: none;
+        }
+    }
+}}
+/* ==ARMANIMATIONS== */
+@keyframes --head-appears {
+    0%{
+        transform-origin: bottom;
+        transform:scaleY(0%) translateY(50%);
+        z-index: -1;
+    }
+    40%, 60%{
+        transform: scaleY(50%) translateY(50%);
+        z-index: -1;
+    }
+    90%{
+        transform:translateY(-25%);
+    }
+    100%{
+        transform:scaleY(100%) translateY(0%);
+    }
+}
+@keyframes --lower-arms {
+    from{
+        transform: rotate(var(--start));
+    }
+    to{
+        transform: rotate(0deg)
+    }
 }
 
-div{
+/* ==SNOUTBUTTON== */
 
-    font-size: 2em;
-color: gold
+section:has(input[value="--Rotate-Snout-1"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(160deg);}
+section:has(input[value="--Rotate-Snout-2"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(120deg);}
+section:has(input[value="--Rotate-Snout-3"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(80deg);}
+section:has(input[value="--Rotate-Snout-4"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(40deg);}
+section:has(input[value="--Rotate-Snout-5"]:checked) section:has(> div) > :nth-child(2) > :first-child{transform: rotateZ(0deg);}
+
+/* changes cursor of snout, turns off nose*/
+@container style(--Trigger-Nose:false){
+    section:has(>div){
+        &>:nth-child(2) > :first-child {
+            &>label{
+                cursor:pointer;
+            }
+        & label:last-of-type {
+   display:none;
+       }
+       }       
+}}
+
+/* activates snout and nose animation */
+@container style(--Trigger-Nose:true){
+   section:has(>div) >:nth-child(2) > :first-child{
+  animation:--snout-correct 2s linear forwards .2s;
+   --scale: 3;
+   --rotateY: 180deg;
+        &> label:last-of-type{
+            animation:--invisible 1s linear, --snout-correct 2s linear 1.2s;
+            --rotateZ: 360deg;
+            --scale: 3;
+            --rotateY: 0deg;
+            cursor:pointer;
+        }
+}}
+/* ==SNOUTANIMATIONS== */
+@keyframes --snout-correct {
+0%{
+    transform: scale(1, 1) rotateY(0deg) rotateZ(0deg);
+    z-index: 3;
 }
+50%{
+    transform: scale(var(--scale), var(--scale)) rotateY(var(--rotateY, 0)) rotateZ(var(--rotateZ, 0));
+    z-index: 3;
+}
+100%{
+    transform: scale(1, 1) rotateY(var(--rotateY, 0)) rotateZ(calc(var(--rotateZ, 0deg) * 2));
+    z-index: 3;
+}}
+
+
+  /* ==NOSEBUTTON== */
+  /* Hands hidden, Ears hidden, teeth hidden */
+@container style(--Trigger-Ears:false){
+    section:has(>div){
+        &> fieldset:first-of-type >label:has(div),
+        &> fieldset:nth-of-type(2) >label:has(div){
+               display: none;
+            }
+        &>:nth-child(2){
+            & :first-child >div{
+                display:none;
+            }
+            & > div:nth-of-type(3),& > div:nth-of-type(4){
+                display:none;
+            }
+        }
+}}
+  /* Hands appear, Ears appear, Eyes open, Teeh appear, nose cursor normal */
+@container style(--Trigger-Ears:true){
+    section:has(>div){
+        &> fieldset:first-of-type >label:has(div){
+            animation:--invisible 3.5s linear, --flicker-border .5s linear 3.5s;
+            cursor: pointer;
+        }
+        &> fieldset:nth-of-type(2) >label:has(div){
+            animation:--invisible 4.5s linear, --flicker-border 1s linear 4.5s;
+            cursor: pointer;
+        }
+
+        /* turn off cursor on nose */
+    &>:nth-child(2){
+        &> :first-child{
+            &> label:last-of-type{
+                cursor: default;
+                }
+                & > div{
+                    animation: --invisible 3s, --teeth-grow .5s linear 3s;
+                }
+        }
+        &> div:nth-of-type(1), &> div:nth-of-type(2){
+            --eye-closed: 75%;
+            animation: 
+            /* Sanne heeft me geholpen met de animation iteration samen te voegen met de animation functie. */
+                --blink .4s linear 4 2s, 
+                --blink 2s linear infinite 3.5s;
+        }
+
+        & > div:nth-of-type(3){
+        animation:--trigger-ears 2s linear;
+    }
+    & > div:nth-of-type(4){
+        animation:--trigger-ears 2s linear;
+        --first: -40%;
+        --second: -130%;
+        --third:-275%;
+        --fourth:-253%;
+    }}
+}}
+
+
+/* ==NOSEANIMATIONS= */
+@keyframes --trigger-ears {
+    0%{
+        transform:translate(var(--first, 40%), 75%);
+    }
+    25%{
+        transform:translate(0%, -20%);
+    }
+    50%{
+        transform: translate(var(--second, 130%), -60%);
+    }
+    75%{ 
+        transform: translate(var(--third, 275%), -20%);
+    }
+    100%{
+        transform: translate(var(--fourth, 253%), 0%);
+    }
+}
+
+@keyframes --teeth-grow {
+    from{
+        transform:scaleY(0);
+    }
+    to{
+        transform: scaleY(1);
+    }
+}
+
+@keyframes --blink {
+    0% {
+        --eye-closed: 75%;
+    }
+    25%{
+        --eye-closed: 0%;
+    }
+}
+
+/* ==CLAWBUTTONS== */
+@container style(--Left-Claws-Appear:false){section:has(> div) > fieldset:first-of-type > label:has(div) > :first-child{display:none;}}
+@container style(--Left-Claws-Appear:true){ section:has(> div) > fieldset:first-of-type > label:has(div) {
+    cursor: default;
+    &> :first-child{
+        animation: --claw-appears .4s linear; --start: -55%;
+    }}}
+@container style(--Right-Claws-Appear:false){section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{display:none;}}
+@container style(--Right-Claws-Appear:true){section:has(> div) > fieldset:nth-of-type(2) > label:has(div){ 
+    cursor: default;
+    &> :first-child{
+         animation: --claw-appears .4s linear; --start: 55%;
+        }}} 
+   
+/* ==CLAWANIMATION== */
+/* Chat GPT told me I could use a variable for the start when I asked if there was a way not to have the animation double. */
+@keyframes --claw-appears {
+from {
+transform: translateX(var(--start));
+}
+to{
+transform: translateX(0%)
+}
+}
+
+/* ==DIGGING== */
+@container style(--Right-Claws-Appear:true) and style(--Left-Claws-Appear:true){
+    section:has(> div){
+        transform-origin: center;
+        animation: --jump-body 2s linear forwards .5s, --digging-body 10s linear forwards 2.6s;
+        &> fieldset:first-of-type{
+            animation: --jump-arms 1.6s linear forwards, --digging-arms .75s linear forwards 2.25s 10;
+        }
+        &> fieldset:nth-of-type(2){
+            animation: --jump-arms 1.6s linear forwards, --digging-arms .75s linear forwards 2.5s 10;
+            --jumpStart: -160deg;
+            --dig-1: -160deg;
+            --dig-2: -90deg;
+        }
+    }
+} 
+   
+@keyframes --jump-body{
+    0%{
+        transform: translate(0%) scaleY(1);
+    }
+    30%{
+        transform: translateY(5%) scaleY(.9);
+    }
+    40%{ 
+        transform: 
+        scaleY(1) 
+        translateY(-50%)
+        ; 
+    } 
+    60%{
+        transform:
+        translateY(-50%)
+        rotateZ(90deg)
+    }
+    80%{ 
+        transform:
+        translateY(-20%)
+        rotateZ(180deg)
+    }
+    100%{ 
+        transform: 
+        translateY(10%) 
+        rotateZ(180deg)
+        
+    } 
+
+}
+
+@keyframes --digging-body{
+    0%{
+        transform: 
+        translateY(10%) 
+        rotateZ(180deg)
+    }
+    100%{
+        transform: 
+        translateY(100vh) 
+        rotateZ(180deg)
+    }
+}
+
+@keyframes --jump-arms{
+    0%{
+        transform:rotate(0deg) rotate(0deg);
+    }
+    30%{
+        transform:rotate(0deg) rotate(0deg);
+    }
+    100%{
+        transform:rotate(var(--jumpStart,160deg))
+    }
+}
+@keyframes --digging-arms {
+    0% {
+        transform: rotate(var(--dig-1,160deg)) translateY(0%);
+    }
+    33% {
+        transform: rotate(var(--dig-2,90deg)) translateY(-5%);
+    }
+    66% {
+        transform: rotate(var(--dig-1,160deg)) translateY(-15%);
+    }
+    100% {
+        transform: rotate(var(--dig-1,160deg)) translateY(0%);
+    }
+}
+
+/* ==CONTAINER== */
+@container (max-width: 130px) {
+    section:has(> div){
+        width:200%;
+        height:200%;
+        left: -50%;
+    }
+    section:has(> div) > fieldset:nth-of-type(1) > label:has(div) > :first-child,
+    section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{
+        left: 30%;
+
+        &::after{
+            content:none;
+        }
+        &::before{
+            bottom: -200%;
+        }
+    }
+    section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{
+        left: 0%;
+    } 
+}
+/* ==TEXT== */
+@container style(--Right-Claws-Appear:false) or style(--Left-Claws-Appear:false){
+    h1{
+        display: none;
+    }
+} 
+
+  @container style(--Right-Claws-Appear:true) and style(--Left-Claws-Appear:true){
+    h1{
+        font-size: 3em;
+        text-align: center;
+        -webkit-text-stroke: 1px black;  
+        color: gold;
+        animation: --text-appears 5s linear forwards 4s;
+        transform:translateY(80dvh);
+        /* https://prismic.io/blog/css-text-animations */
+    span{
+        animation: --wave 2s ease-in-out infinite;
+        display: inline-block;
+    &:nth-child(1) { --index-h1: 1; }
+    &:nth-child(2) { --index-h1: 2; }
+    &:nth-child(3) { --index-h1: 3; }
+    &:nth-child(4) { --index-h1: 4; }
+    &:nth-child(5) { --index-h1: 5; }
+    &:nth-child(6) { --index-h1: 6; }
+    &:nth-child(7) { --index-h1: 7; }
+    &:nth-child(8) { --index-h1: 8; }
+    &:nth-child(9) { --index-h1: 9; }
+    &:nth-child(10) { --index-h1: 10; }
+    &:nth-child(11) { --index-h1: 11; }
+    &:nth-child(12) { --index-h1: 12; }
+    &:nth-child(13) { --index-h1: 13; }
+    &:nth-child(14) { --index-h1: 14; }
+    &:nth-child(15) { --index-h1: 15; }
+    &:nth-child(16) { --index-h1: 16; }
+    &:nth-child(n){
+        animation-delay: calc(0.2s * (var(--index-h1) - 1) + 4s);
+    }
+    }
+}
+}
+
+@keyframes --text-appears{
+    0%{
+    transform:translateY(80dvh);
+    }
+    100%{ 
+        transform:translateY(0%)
+       }
+}
+ /* https://prismic.io/blog/css-text-animations */
+@keyframes --wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+
+/* ==OTHER== */
+html:has([value="--arm"]:checked) {
+    --Arms-Appear: true;
+  }
+
+  html:has([value="--RightClaw"]:checked) {
+    --Right-Claws-Appear:true;
+  }
+  html:has([value="--LeftClaw"]:checked) {
+    --Left-Claws-Appear:true;
+  }
+
+  html:has([value="--Left-Arm-5"]:checked) {
+    --Left-Arm-Top: true;
+  }
+  html:has([value="--Right-Arm-5"]:checked) {
+    --Right-Arm-Top: true;
+  }
+
+  html:has([value="--Rotate-Snout-5"]:checked) {
+    --Trigger-Nose: true;
+  }
+ 
+  html:has([value="--Trigger-Ears"]:checked) {
+    --Trigger-Ears: true;
+  }
