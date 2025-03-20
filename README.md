@@ -396,6 +396,8 @@ section:has(input[value="--arm"]:checked) section:has(> div) > div:nth-child(3){
 
 ### volgende week
 
+* control panel
+
 ## bronnen
 
 https://thoughtbot.com/blog/transitions-and-transforms
@@ -405,7 +407,138 @@ https://thoughtbot.com/blog/css-animation-for-beginners
 https://developer.mozilla.org/en-US/docs/Web/CSS/transition
 
 
+# proces week 4
 
-YOO MISSCHIEN INSPIRATIE VOOR CONTROL PANEL https://www.eyezmaze.com/game/black-box.html
+Deze week begon ik met besluiten dat ik ging switchen naar een control panel. Ik had een plan, niet een volledig plan, maar een plan.
 
-* de timeline
+* je klikt op de buik.
+* armen verschijnen
+* klik op armen
+* als armen omhoog zijn verschijnt het hoofd als ballon
+* de neus is een knop
+* als het hoofd klaar is verschijnen de handen
+* klik op de handen om de klauwen te laten verschijnen
+
+Ik had vorige week al de buik gemaakt, dus nu begon ik met de armen. Sanne gaf me een link waarmee ik heel goed op weg kon.Toen ik het had vertaald naar mijn code werkte het ook, maar toen ging ik nesten en brak het. Samen met Niels heb ik het kunnen oplossen.
+
+```css
+& label:not(:last-of-type) {
+                grid-area:1/1;	
+                pointer-events:none;
+                opacity:0;	
+                width:100%;
+                height:100%;	
+                &:has( :checked ) + label{
+                    pointer-events: all;
+                }
+            }
+
+section:has(input[value="--Left-Arm-1"]:checked) section:has(> div) > :nth-child(3){transform: rotate(10deg);}
+section:has(input[value="--Left-Arm-2"]:checked) section:has(> div) > :nth-child(3){transform: rotate(30deg);}
+/* enzovoort */
+```
+
+Toen moest ik de hoofd animatie maken en mijn originele idee was een ballon die oppompt terwijl de armen omlaag vallen. Toen ik bezig was met de animatie kreeg ik iets was ik wel leuk vond en ik heb dat gepolished.
+
+```css
+@keyframes --head-appears {
+    0%{
+        transform-origin: bottom;
+        transform:scaleY(0%) translateY(50%);
+        z-index: -1;
+    }
+    40%, 60%{
+        transform: scaleY(50%) translateY(50%);
+        z-index: -1;
+    }
+    90%{
+        transform:translateY(-25%);
+    }
+    100%{
+        transform:scaleY(100%) translateY(0%);
+    }
+}
+```
+![alt text](images/HeadPops.gif)
+
+Vervolgens liep ik vast. Ik had het hoofd, maar hoe nu verder? Na veel nadenken besloot ik uiteindelijk om de snuit te laten verschijnen, zoals de armen deden, nadat het hoofd neergezet was. Vervolgens moet je klikken op de snuit om het te draaien en als die goed staat verschijnt de neus. Voor het draaien gebruikte ik dezelfde techniek als de armen. Daarna maakte ik de animatie van de snuit.
+
+```css
+@container style(--Trigger-Nose:true){
+   section:has(>div) >:nth-child(2) > :first-child{
+  animation:--snout-correct 2s linear forwards .2s;
+   --scale: 3;
+   --rotateY: 180deg;
+        &> label:last-of-type{
+            animation:--invisible 1s linear, --snout-correct 2s linear 1.2s;
+            --rotateZ: 360deg;
+            --scale: 3;
+            --rotateY: 0deg;
+            cursor:pointer;
+        }
+}}
+/* ==SNOUTANIMATIONS== */
+@keyframes --snout-correct {
+0%{
+    transform: scale(1, 1) rotateY(0deg) rotateZ(0deg);
+    z-index: 3;
+}
+50%{
+    transform: scale(var(--scale), var(--scale)) rotateY(var(--rotateY, 0)) rotateZ(var(--rotateZ, 0));
+    z-index: 3;
+}
+100%{
+    transform: scale(1, 1) rotateY(var(--rotateY, 0)) rotateZ(calc(var(--rotateZ, 0deg) * 2));
+    z-index: 3;
+}}
+```
+![alt text](images/Snout.gif)
+
+Toen ik de neus had moest de neus daadwerkelijk iets doen. Ik had niet veel tijd meer over dus ik besloot niet alle onderdelen van het hoofd puzzelstukjes te maken. De neus was de laatste.
+
+Beginnend met de oren wou ik dat ze uit het hoofd popte, rondvlogen en dan in het andere oor gingen. Dit was veels te hoog gegrepen, dus inplaats daarvan bewegen de oren langs het hoofd en gaan ze in het andere oor.
+
+Dit liet me denken als een aanknop die ingedrukt werd. Ik had al een knipper animatie, maar nu heb ik die knipper animatie ook eerst versneld afgespeeld. Om het gevoel te geven dat de groundhog wakker schrikt. Vervolgens liet ik de tanden verschijnen.
+
+Nu het hoofd klaar was moesten de handen verschijnen. Wat ik met dezelfde knipper animatie deed als de armen.
+
+![alt text](images/Nose.gif)
+
+Als laatste stap wou ik de klauwen uitschuiven. Deze animatie had ik gelukkig al vorige week gemaakt.
+
+![alt text](images/Claws%20‐%20Gemaakt%20met%20Clipchamp.gif)
+
+En dan natuurlijk als laatste stap, de grand finale. Ik wou dat de groundhog weggraafde. Ik wou dat hij de lucht in sprong en draaide, maar 'technisch gezien' kijkt hij dan de verkeerde kant op, dus ik wou een halve verticale draai en een volledige horizontale draai. Dit had ik gemaakt, en toen was het 2D. Dus dat schrapte ik en nu draait hij alleen op de X as.
+
+![alt text](images/Dig.gif)
+
+Daarna moest ik nog iets doen met tekst. Ik wou dat het uit de grond kwam en dat is met uiteindelijk gelukt. Maar ik kon geen mooie tekst kleur vinden. Dus toen heb ik met behulp van Elton de achtergrond verandert en een wave toegevoegd aan mijn titel. En deze titel verschijnt natuurlijk als de groundhog naar benenden graaft.
+
+![alt text](images/TitleScreen.gif)
+
+## bronnen
+
+https://codepen.io/shooft/pen/emYvarP
+
+chatGPT voor verwijzingen in code
+
+Dante
+
+Elton
+
+Sanne
+
+Roel
+
+# reflectie
+
+Het concept van dit project vind ik leuk. Dat ik mag kiezen tussen 3 opdrachten is goed. Ik heb natuurlijk eerst gekozen voor de movie timeline, terwijl ik eigenlijk de control panel leuker vond. Dit kwam omdat de movietimeline makkelijker leek en de control panel echt onmogelijk leek. Ik ben niet het beste in designen dus dat hield me heel erg tegen om de control panel te kiezen. Met de timeline bleek het designen ook veel meer dan verwacht en omdat ik daar dus slechter en ook nieuw maakte ik niet heel veel progressie de eerste 3 weken. Ik keek heel erg op tegen het maken van de timeline en toen ik er uiteindelijk moest lukte het niet en toen was ik daar ook echt klaar mee. Ik ben heel blij dat ik geswitched ben naar de control panel, want uiteindelijk was ik daar ook veel sneller mee. Uiteindelijk heb ik ook veel geleerd over css en voornamelijk nesting. Ik heb technieken gebruikt zoals:
+
+* Nesting
+* Style Queries
+* Container Queries
+* has
+* animaties
+* css in general
+
+Ik heb nog een lange weg te gaan om daadwerkelijk met vertrouwen een site in elkaar te kunnen zetten, maar ik vond dit een redelijk begin.

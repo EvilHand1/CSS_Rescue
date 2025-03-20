@@ -23,19 +23,13 @@ index
     padding:0;
 }
 :root{
-    --primary-color: #013cab;
-    --secondary-color: #1d5335;
-    --tertery-color: #542d1c;
     --size-bosmarmot:20dvw;
 
     --Arms-Appear:false;
-
     --Left-Claws-Appear:false;
     --Right-Claws-Appear: false;
-
     --Left-Arm-Top: false;
     --Right-Arm-Top: false;
-
     --Trigger-Nose: false;
     --Trigger-Ears: false;
 }
@@ -728,7 +722,7 @@ transform: translateX(0%)
 /* ==TEXT== */
 @container style(--Right-Claws-Appear:false) or style(--Left-Claws-Appear:false){
     h1{
-        display: none;
+        display: none;  
     }
 } 
 
