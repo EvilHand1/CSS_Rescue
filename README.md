@@ -396,4 +396,16 @@ section:has(input[value="--arm"]:checked) section:has(> div) > div:nth-child(3){
 
 ### volgende week
 
+## bronnen
+
+https://thoughtbot.com/blog/transitions-and-transforms
+
+https://thoughtbot.com/blog/css-animation-for-beginners
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+
+
+
+YOO MISSCHIEN INSPIRATIE VOOR CONTROL PANEL https://www.eyezmaze.com/game/black-box.html
+
 * de timeline
