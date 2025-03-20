@@ -14,8 +14,9 @@ HET PROBLEEM WAT JE MOMENTEEL HEBT ZIJN HET VOLGENDE:
     padding:0;
 }
 :root{
-    --primary-color: #C3EEFA;
-    --secondary-color: #805D3C;
+    --primary-color: #013cab;
+    --secondary-color: #1d5335;
+    --tertery-color: #542d1c;
     --size-bosmarmot:20dvw;
 
     --Arms-Appear:false;
@@ -29,18 +30,26 @@ HET PROBLEEM WAT JE MOMENTEEL HEBT ZIJN HET VOLGENDE:
     --Trigger-Nose: false;
     --Trigger-Ears: false;
 }
+
 body{
-    background: linear-gradient(
-        to bottom,
-        var(--primary-color) 0 40dvh,
-        var(--secondary-color) 0 100%
-    );
+    background: linear-gradient(to bottom, #2d91c2 0%,#1e528e 100%); 
     margin:0;
     height: 100dvh;
     display:grid;
     place-items: center;
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/font */
     font: italic small-caps bold 16px/2 cursive;
+    position: relative;
+
+    overflow:hidden;
+    &::before{
+        content: '';
+        position: absolute;
+        height: 40vh;
+        width: 100%;
+        bottom: 0;
+        background: linear-gradient(to bottom, #057a26 5%, #d4ff00 12.5%, #9F6942 20%);
+    }
     
 }
 
@@ -53,13 +62,8 @@ section:has(section){
     --size-line:calc(  var(--size-bosmarmot) / 100);
     width: var(--size-bosmarmot);
     aspect-ratio: 35/40;
-    position: fixed;
+    position: absolute;
     top: calc(40dvh + var(--size-bosmarmot) * 0.1);
-    animation: draaien linear;
-    animation-timeline: scroll();
-    animation-range-start: 30px;
-    animation-iteration-count: 5;
-    
     container-type: inline-size;
 
     & :nth-child(1n){
@@ -78,7 +82,7 @@ section:has(> div){
     --claw-color-groundhog:#dfd7d3;
     --border-color: black;
     --white:white;
-
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     width:100%;
     height:100%;
     display:grid;
@@ -107,6 +111,7 @@ section:has(> div){
             height: 40%; 
             border-radius:80% 80% 80% 81% / 50% 50% 80% 81% ;
             background-color: var(--secondary-color-groundhog);
+            transition: all .20s;
             
 
             & label:not(:last-of-type) {
@@ -216,7 +221,7 @@ section:has(> div){
         height: 60%; 
         rotate: 35deg;
         display:grid;
-        
+        transition: all .20s;
         /* This comes from Sannes code pen, but I did nest it with the help Niels
         https://codepen.io/shooft/pen/emYvarP
          */
@@ -381,7 +386,7 @@ section:has(input[value="--Right-Arm-5"]:checked) section:has(> div) > :nth-chil
 @container style(--Left-Arm-Top:true) and style(--Right-Arm-Top:true){
 section:has(> div){
    & > :nth-child(2){
-    /* animation: HeadBalloon 2s linear; */
+    animation: HeadBalloon 2s linear;
     }
     & > fieldset:first-of-type{
         animation: LowerArms 2s linear forwards;
@@ -449,11 +454,11 @@ section:has(input[value="--Rotate-Snout-5"]:checked) section:has(> div) > :nth-c
 /* activates snout and nose animation */
 @container style(--Trigger-Nose:true){
    section:has(>div) >:nth-child(2) > :first-child{
-  /* animation:SnoutCorrect 2s linear forwards .2s; */
+  animation:SnoutCorrect 2s linear forwards .2s;
    --scale: 3;
    --rotateY: 180deg;
         &> label:last-of-type{
-            /* animation:invisible 1s linear, SnoutCorrect 2s linear 1.2s; */
+            animation:invisible 1s linear, SnoutCorrect 2s linear 1.2s;
             --rotateZ: 360deg;
             --scale: 3;
             --rotateY: 0deg;
@@ -686,6 +691,88 @@ transform: translateX(0%)
     }
 }
 
+/* ==CONTAINER== */
+@container (max-width: 130px) {
+    section:has(> div){
+        width:200%;
+        height:200%;
+        left: -50%;
+    }
+    section:has(> div) > fieldset:nth-of-type(1) > label:has(div) > :first-child,
+    section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{
+        left: 30%;
+
+        &::after{
+            content:none;
+        }
+        &::before{
+            bottom: -200%;
+        }
+    }
+    section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{
+        left: 0%;
+    } 
+}
+/* ==TEXT== */
+@container style(--Right-Claws-Appear:false) or style(--Left-Claws-Appear:false){
+    h1{
+        display: none;
+    }
+} 
+
+  @container style(--Right-Claws-Appear:true) and style(--Left-Claws-Appear:true){
+    h1{
+        font-size: 3em;
+        text-align: center;
+        -webkit-text-stroke: 1px black;  
+        color: gold;
+        animation: textAppears 5s linear forwards 4s;
+        transform:translateY(80dvh);
+    span{
+        animation: --wave 2s ease-in-out infinite;
+        display: inline-block;
+        &:nth-child(1) { --index: 1; }
+    &:nth-child(2) { --index: 2; }
+    &:nth-child(3) { --index: 3; }
+    &:nth-child(4) { --index: 4; }
+    &:nth-child(5) { --index: 5; }
+    &:nth-child(6) { --index: 6; }
+    &:nth-child(7) { --index: 7; }
+    &:nth-child(8) { --index: 8; }
+    &:nth-child(9) { --index: 9; }
+    &:nth-child(10) { --index: 10; }
+    &:nth-child(11) { --index: 11; }
+    &:nth-child(12) { --index: 12; }
+    &:nth-child(13) { --index: 13; }
+    &:nth-child(14) { --index: 14; }
+    &:nth-child(15) { --index: 15; }
+    &:nth-child(16) { --index: 16; }
+    &:nth-child(n){
+        animation-delay: calc(0.2s * (var(--index) - 1) + 4s);
+    }
+    }
+}
+}
+
+@keyframes textAppears{
+    0%{
+    transform:translateY(80dvh);
+    }
+    100%{ 
+        transform:translateY(0%)
+       }
+}
+ 
+@keyframes --wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+
 /* ==OTHER== */
 html:has([value="--arm"]:checked) {
     --Arms-Appear: true;
@@ -712,56 +799,3 @@ html:has([value="--arm"]:checked) {
   html:has([value="--Trigger-Ears"]:checked) {
     --Trigger-Ears: true;
   }
-  
-  
-  @container style(--Right-Claws-Appear:false) or style(--Left-Claws-Appear:false){
-    h1{
-        display: none;
-    }
-} 
-
-  @container style(--Right-Claws-Appear:true) and style(--Left-Claws-Appear:true){
-    h1{
-        display: block;
-        animation: textAppears 5s linear forwards 4s;
-        color: transparent;
-        background-clip: text;
-        -webkit-text-stroke: 1px black;  
-        transform:translateY(100vh);
-        background-image: linear-gradient(to bottom, #de4b57 20%, transparent 40%);
-    background-size: 0% 0%;
-    }
-  }
-@keyframes textAppears{
-    0%{
-        background-size: 100% 100%;  
-    transform:translateY(100vh);
-    }
-    100%{ 
-        background-size: 200% 200%; 
-        transform:translateY(00%)
-       }
-}
- 
-@container (max-width: 130px) {
-    section:has(> div){
-        width:200%;
-        height:200%;
-        left: -50%;
-    }
-    section:has(> div) > fieldset:nth-of-type(1) > label:has(div) > :first-child,
-    section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{
-        left: 30%;
-
-        &::after{
-            content:none;
-        }
-        &::before{
-            bottom: -200%;
-        }
-    }
-    section:has(> div) > fieldset:nth-of-type(2) > label:has(div) > :first-child{
-        left: 0%;
-    } 
-}
-
